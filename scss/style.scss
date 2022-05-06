@@ -1,0 +1,373 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+@import url("../css/nullStyle.css");
+
+@import url(../fontawesome-free-6.1.1-web/css/all.css);
+
+* {
+   font-family: "Montserrat", sans-serif;
+   letter-spacing: 1.2px;
+   line-height: 1rem;
+}
+
+//repeating blocks
+.container {
+   max-width: 85%;
+   margin: 0 auto;
+   padding: 0 14px;
+}
+
+.displayNone {
+   display: none !important;
+}
+
+.rotate180 {
+   transform: rotate(180deg);
+}
+
+//variables
+$color_1: #7957d5;
+
+$headerBackgroundColor: #333;
+$headerFontColor: white;
+$headerHeight: 110px;
+
+$headerLogoGap: 1rem;
+$headerLogoHeading: 2rem;
+$headerLogoIconSize: 1.7rem;
+
+$headerMenuGap: 1.8rem;
+$headerMenuTextSize: 1.1rem;
+
+$headerSelectBackground: #666; ///????????????
+
+$cartSize: 1.5rem;
+
+$loginBorder: 2px solid #ccc;
+$loginBorderRadius: 20px;
+$loginPadding: 0.5rem 0.7rem;
+
+/// filter
+$filterNameSize: 1.2rem;
+$filterBackground: #f2f2f2;
+$filterCheckboxtitleSize: 1rem;
+$filterCheckboxSize: 1.3rem;
+
+///search
+$searchBackgroundColor: #fafafa;
+
+.header {
+   width: 100%;
+   height: $headerHeight;
+   background-color: $headerBackgroundColor;
+   color: $headerFontColor;
+
+   &__container {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   &-logo {
+      display: flex;
+      align-items: center;
+      gap: $headerLogoGap;
+   }
+
+   &-logo__icon {
+      font-size: $headerLogoIconSize;
+   }
+
+   &-logo__heading {
+      font-size: $headerLogoHeading;
+   }
+
+   &-menu {
+      display: flex;
+      align-items: center;
+      gap: $headerMenuGap;
+      font-size: $headerMenuTextSize;
+   }
+
+   .language,
+   .currency {
+      select,
+      option {
+         background-color: $headerSelectBackground;
+         padding: 8px 20px 8px 8px;
+         border-radius: 5px;
+         color: #ccc;
+      }
+   }
+
+   .cart {
+      font-size: $cartSize;
+      &:hover {
+         opacity: 0.7;
+         transform: scale(1.1);
+         cursor: pointer;
+      }
+   }
+
+   .login {
+      border: $loginBorder;
+      border-radius: $loginBorderRadius;
+      padding: $loginPadding;
+
+      span:first-child,
+      span:last-child {
+         padding: 5px;
+      }
+      span:hover:first-child,
+      span:hover:last-child {
+         opacity: 0.7;
+         cursor: pointer;
+      }
+      span:active {
+         opacity: 1;
+      }
+   }
+}
+
+.content-wraper {
+   height: 100%;
+   display: flex;
+}
+
+.filter {
+   width: 22%;
+   height: 100%;
+   background-color: $filterBackground;
+
+   &-container {
+      padding: 1.5rem;
+   }
+
+   &-box {
+      margin-bottom: 1.4rem;
+      &:last-child {
+         margin-bottom: 0;
+      }
+   }
+
+   &-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.1rem;
+   }
+
+   &-name {
+      font-size: $filterNameSize;
+      font-weight: 500;
+   }
+
+   &-toggle {
+      font-size: $filterNameSize;
+      i {
+         padding: 6px;
+      }
+      i:hover {
+         opacity: 0.6;
+         transform: scale(1.2);
+         cursor: pointer;
+      }
+      &:active {
+         opacity: 0.6;
+      }
+   }
+
+   &-checkbox {
+      margin-left: 0.5rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: $filterCheckboxtitleSize;
+      position: relative;
+      padding-left: 26px;
+      font-weight: 500;
+      color: #111;
+      &:last-child {
+         margin-bottom: 0;
+      }
+   }
+
+   .filter-checkbox__input {
+      appearance: none;
+      position: absolute;
+   }
+
+   .filter-checkbox__product-counter {
+      font-size: 0.8rem;
+      color: #666;
+   }
+
+   .filter-checkbox__label,
+   .filter-checkbox__label:before {
+      cursor: pointer;
+   }
+
+   .filter-checkbox__label:before {
+      content: "";
+      display: block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #7a7a7a;
+      border-radius: 4px;
+      background-color: #fff;
+      position: absolute;
+      top: -2px;
+      left: 0;
+      z-index: 1;
+      padding-right: 15px;
+   }
+
+   .filter-checkbox__label:after {
+      content: "";
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1538-155L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 50%;
+      z-index: 0;
+   }
+
+   .filter-checkbox__label:hover:before {
+      border: 2px solid #896bda;
+      box-shadow: 0 0 10px #896bda;
+   }
+
+   .filter-checkbox__label:active:before {
+      box-shadow: none;
+   }
+
+   .filter-checkbox__input:checked + .filter-checkbox__label:before {
+      background-color: #7957d5;
+      border: none;
+   }
+
+   .filter-checkbox__input:checked + .filter-checkbox__label:after {
+      z-index: 1;
+   }
+
+   .filter-checkbox__input:disabled + .filter-checkbox__label,
+   .filter-checkbox__input:disabled + .filter-checkbox__label:before {
+      opacity: 0.5;
+      cursor: not-allowed;
+   }
+}
+
+.search {
+   height: 200px;
+   width: 370px;
+   background-color: $searchBackgroundColor;
+   padding: 60px;
+   position: relative;
+
+   .search__container {
+      box-shadow: 2px 2px 4px grey;
+      position: relative;
+      width: 100%;
+      border-radius: 8px;
+
+      &:hover {
+         box-shadow: 0 0 10px $color_1;
+      }
+   }
+
+   input {
+      width: 100%;
+      height: 100%;
+      border: 2px solid grey;
+      font-size: 1.05rem;
+      border-radius: 8px;
+      padding: 10px;
+      &:focus {
+         background-color: rgba($color: #ddd, $alpha: 0.2);
+      }
+   }
+
+   .search-erase {
+      position: absolute;
+      top: 6.6px;
+      right: 4px;
+      color: purple;
+      padding: 6px;
+      font-size: 1.12rem;
+      cursor: pointer;
+
+      &:hover {
+         transform: scale(1.13);
+         opacity: 0.7;
+      }
+
+      &:active {
+         opacity: 0.9;
+      }
+   }
+}
+
+.product-vue {
+}
+
+.footer {
+   height: 60px;
+   background-color: #333;
+   color: white;
+
+   .container {
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+
+   &-text {
+      font-size: 1.15rem;
+   }
+
+   &__icon-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 1.4rem;
+
+      & > i {
+         padding: 5px;
+      }
+
+      & > i:hover {
+         transform: scale(1.2);
+      }
+
+      & > i:active {
+         opacity: 0.6;
+      }
+
+      .fa-telegram {
+         color: #229ed9;
+      }
+
+      .fa-facebook-f {
+         color: #3b5998;
+      }
+
+      .fa-twitter {
+         color: #00acee;
+      }
+
+      .fa-whatsapp {
+         color: #43d854;
+      }
+
+      .fa-viber {
+         color: #8f5db7;
+      }
+   }
+}

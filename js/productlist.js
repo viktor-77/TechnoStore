@@ -1,0 +1,156 @@
+let phones = [
+    {
+        id: 1,
+        brend: "iphone",
+        price: 35000,
+        color: "green",
+        memory: '32',
+        RAM: '4',
+        diagonal: '6',
+        name: "samsung",
+
+    },
+    {
+        id: 2,
+        brend: "samsung",
+        price: 35000,
+        color: "grey",
+        memory: '64',
+        RAM: '4',
+        diagonal: '6',
+        name: "samsung",
+
+    },
+    {
+        id: 3,
+        brend: "samsung",
+        price: 35000,
+        color: "grey",
+        memory: '64',
+        RAM: '4',
+        diagonal: '6',
+        name: "samsung",
+    },
+    {
+        id: 4,
+        brend: "iphone",
+        price: '35000',
+        color: "green",
+        memory: '32',
+        RAM: '4',
+        diagonal: '6',
+        name: "iphone10",
+    },
+    {
+        id: 5,
+        brend: "iphone",
+        price: '35000',
+        color: "grey",
+        memory: '64',
+        RAM: '4',
+        diagonal: '6',
+        name: "iphone10",
+    },
+    {
+        id: 6,
+        price: '35000',
+        color: "green",
+        memory: '64',
+        RAM: '4',
+        diagonal: '6',
+        brend: "iphone",
+        name: "iphone10",
+    },
+    {
+        id: 7,
+        brend: "iphone",
+        price: '21500',
+        color: "grey",
+        memory: '32',
+        RAM: '3',
+        diagonal: '6',
+        name: "iphone10",
+    },
+    {
+        id: 8,
+        brend: "xiomi",
+        price: '35000',
+        color: "grey",
+        memory: '64',
+        RAM: '4',
+        diagonal: '6',
+        name: "iphone13",
+    },
+
+    {
+        id: 9,
+        brend: "iphone",
+        price: '29000',
+        color: "grey",
+        memory: '32',
+        RAM: '4',
+        diagonal: '6',
+        name: "iphone12",
+    },
+    {
+        id: 10,
+        brend: "iphone",
+        price: '29000',
+        color: "grey",
+        memory: '32',
+        RAM: '3',
+        diagonal: '7',
+        name: "iphone11",
+    },
+    {
+        id: 11,
+        brend: "iphone",
+        price: '28000',
+        color: "grey",
+        memory: '32',
+        RAM: '3',
+        diagonal: '4',
+        name: "iphone10",
+    },
+    {
+        id: 12,
+        brend: "iphone",
+        price: '10000',
+        color: "grey",
+        memory: '32',
+        RAM: '3',
+        diagonal: '5',
+        name: "iphone10",
+    },
+    {
+        id: 13,
+        brend: "iphone",
+        price: '10000',
+        color: "red",
+        memory: '32',
+        RAM: '3',
+        diagonal: '5',
+        name: "iphone10",
+    },
+    {
+        id: 14,
+        brend: "iphone",
+        price: '9000',
+        color: "yellow",
+        memory: '32',
+        RAM: '3',
+        diagonal: '4',
+        name: "iphone10",
+    },
+]
+
+let categories = [];
+phones.map(item => {
+    for (let cat in item) {
+        if (cat === 'price' || cat === 'id' || cat === 'name') continue;
+        if (!categories.includes(cat)) categories.push(cat);
+    }
+})
+
+
+export default { phones, categories };
