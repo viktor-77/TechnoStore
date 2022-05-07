@@ -2,118 +2,136 @@
 <html lang="en">
 
 <head>
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="css/style.css">
-   <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
-   <link rel="icon" href="./img/istockphoto-1222709954-170x170.ico">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
+    <link rel="icon" href="./img/istockphoto-1222709954-170x170.ico">
 
 </head>
 
 <body>
-   <header class="header">
-      <div class="header__container container">
-         <div class="header-logo">
-            <div class="header-logo__icon">
-               <i class="fa-brands fa-teamspeak"></i>
+    <header class="header">
+        <div class="header__container container">
+            <div class="header-logo">
+                <div class="header-logo__icon">
+                    <i class="fa-brands fa-teamspeak"></i>
+                </div>
+                <div class="header-logo__heading">Techno Store</div>
             </div>
-            <div class="header-logo__heading">Techno Store</div>
-         </div>
-         <nav class="header-menu">
-            <div class="header-menu__item">
-               <!--currency-->
-               <div class="currency">
-                  <select value="">
-                     <option>USD</option>
-                     <option>UAH</option>
-                  </select>
-               </div>
+            <nav class="header-menu">
+                <div class="header-menu__item">
+                    <!--currency-->
+                    <div class="currency">
+                        <select value="">
+                            <option>USD</option>
+                            <option>UAH</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="header-menu__item">
+                    <!--lang-->
+                    <div class="language">
+                        <select value="">
+                            <option>EN</option>
+                            <option>UA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="header-menu__item">
+                    <!--cart-->
+                    <div class="cart">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <div class="cart-counter__wrapper">
+                            <div class="cart-counter">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-menu__item">
+                    <!--login-->
+                    <div class="login">
+                        <span>Реєстрація</span>
+                        <span>/</span>
+                        <span>Вхід</span>
+                    </div>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+
+    <div class="content-wraper">
+        <div class="filter">
+            <div class="filter-container">
+
+
+                <div class="filter-box">
+                    <div class="filter-heading">
+                        <div class="filter-name"></div>
+                        <div class="filter-toggle">
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </div>
+                    </div>
+                    <div class="filter-checkbox">
+                        <input class="filter-checkbox__input" type="checkbox">
+                        <label class="filter-checkbox__label"></label>
+                        <span class="filter-checkbox__product-counter"></span>
+                    </div>
+                </div>
+
+
             </div>
-            <div class="header-menu__item">
-               <!--lang-->
-               <div class="language">
-                  <select value="">
-                     <option>EN</option>
-                     <option>UA</option>
-                  </select>
-               </div>
+        </div>
+
+        <div class="search">
+            <div class="search__container">
+                <input type="text" name="" placeholder="...">
+                <i class="search-erase fa-solid fa-xmark"></i>
             </div>
-            <div class="header-menu__item">
-               <!--cart-->
-               <div class="cart">
-                  <i class="fa-solid fa-cart-shopping"></i>
-               </div>
+        </div>
+
+        <div class="product">
+            <div class="product__container">
+                <div class="product__box">
+                    <div class="product__img">
+                        <img src="" alt="product-img">
+                    </div>
+                    <div class="product__name"></div>
+                    <div class="product__price"></div>
+                    <div class="product__actions">
+                        <div class="product__icon add-cart">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </div>
+                        <div class="product__icon favorit">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <div class="product__icon product-compare">
+                            <i class="product-copmpare fa-solid fa-scale-balanced"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="header-menu__item">
-               <!--login-->
-               <div class="login">
-                  <span>Реєстрація</span>
-                  <span>/</span>
-                  <span>Вхід</span>
-               </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-text">
+                Copyright© 2022
             </div>
-
-         </nav>
-      </div>
-   </header>
-
-   <div class="content-wraper">
-      <div class="filter">
-         <div class="filter-container">
-
-
-            <div class="filter-box">
-               <div class="filter-heading">
-                  <div class="filter-name"></div>
-                  <div class="filter-toggle">
-                     <i class="fa-solid fa-chevron-up"></i>
-                  </div>
-               </div>
-               <div class="filter-checkbox">
-                  <input class="filter-checkbox__input" type="checkbox">
-                  <label class="filter-checkbox__label"></label>
-                  <span class="filter-checkbox__product-counter"></span>
-               </div>
+            <div class="footer__icon-links">
+                <i class="fa-brands fa-telegram"></i>
+                <i class="fa-brands fa-facebook-f"></i>
+                <i class="fa-brands fa-twitter"></i>
+                <i class="fa-brands fa-whatsapp"></i>
+                <i class="fa-brands fa-viber"></i>
             </div>
-
-
-         </div>
-      </div>
-
-      <div class="search">
-         <div class="search__container">
-            <input type="text" name="" placeholder="...">
-            <i class="search-erase fa-solid fa-xmark"></i>
-         </div>
-      </div>
-
-      <div class="product-vue">
-         <div class="product-box">
-            <div class="product-img"></div>
-            <div class="product-name"></div>
-            <div class="product-price"></div>
-         </div>
-      </div>
-   </div>
-
-
-   <footer class="footer">
-      <div class="container">
-         <div class="footer-text">
-            Copyright© 2022
-         </div>
-         <div class="footer__icon-links">
-            <i class="fa-brands fa-telegram"></i>
-            <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-twitter"></i>
-            <i class="fa-brands fa-whatsapp"></i>
-            <i class="fa-brands fa-viber"></i>
-         </div>
-      </div>
-   </footer>
-   <script src="./js/index.js" type="module"></script>
-   <script src="./js/productlist.js" type="module"></script>
+        </div>
+    </footer>
+    <script src="./js/index.js" type="module"></script>
+    <script src="./js/productlist.js" type="module"></script>
 </body>
 
 </html>
