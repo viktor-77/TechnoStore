@@ -233,55 +233,54 @@ function updateOnCheckboxClick(e) {
    let searchInput = document.querySelector(".search input");
 
    eraseButton.addEventListener("click", resetSearchText);
+   searchInput.addEventListener("keyup", resetSearchText);
 
-   function resetSearchText() {
-      searchInput.value = '';
-      filterOptionsLists['textFilter'] = '';
 
+   function resetSearchText(e) {
+      if (e.type === 'click') {
+         searchInput.value = '';
+         filterOptionsLists['textFilter'] = '';
+         calcFilterCountlinkers();
+      }
+      else if ((e.type === 'keyup') && e.keyCode == 27) {
+         searchInput.value = '';
+         filterOptionsLists['textFilter'] = '';
+      }
    }
 }
 
 { //search filter
    let searchBlock = document.querySelector('.search input');
-   searchBlock.addEventListener('keyup', function (e) {
+   searchBlock.addEventListener('keyup', sortByTextFilter);
+
+   function sortByTextFilter(e) {
       let textFilter = e.currentTarget.value;
-      if (e.keyCode === 13) {
-         filterOptionsLists['textFilter'] = textFilter;
+      filterOptionsLists['textFilter'] = textFilter;
+      console.log(filterOptionsLists);
+      selectedProducts = [];
+      productList.phones.forEach((product) => {
+         let productCheck = true;
+         for (let category in filterOptionsLists) {
+            if (category === 'textFilter') {
+               let productName = product["name"].split(' ').join('').toLowerCase();
+               let filterTextParameter = filterOptionsLists[category].split(' ').join('').toLowerCase();
 
-         selectedProducts = [];
-         productList.phones.forEach((product) => {
-            let productCheck = true;
-            for (let category in filterOptionsLists) {
-               if (category === 'textFilter') {
-                  let productName = product["name"].split(' ').join('').toLowerCase();
-                  console.log(productName);
-                  let filterTextParameter = filterOptionsLists[category].split(' ').join('').toLowerCase();
-                  console.log(filterTextParameter);
-
-                  if (!productName.includes(filterTextParameter)) {
-                     productCheck = false; break;
-                  }
+               if (!productName.includes(filterTextParameter)) {
+                  productCheck = false; break;
                }
-               else
-                  if (!filterOptionsLists[category].length) {
-                     continue; console.log();
-
-                  }
-                  else if (!filterOptionsLists[category].includes(product[category])) {
-                     productCheck = false; break;
-                  }
             }
-            if (productCheck) selectedProducts.push(product);
-            calcFilterCountlinkers();
-         });
+            else if (!filterOptionsLists[category].length) {
+               continue; console.log();
 
-
-         console.log(filterOptionsLists);
-         console.log(selectedProducts);
-
-      }
-
-   })
+            }
+            else if (!filterOptionsLists[category].includes(product[category])) {
+               productCheck = false; break;
+            }
+         }
+         if (productCheck) selectedProducts.push(product);
+         calcFilterCountlinkers();
+      });
+   }
 
 }
 
