@@ -44,7 +44,15 @@ $filterCheckboxtitleSize: 1rem;
 $filterCheckboxSize: 1.3rem;
 ///search
 $searchBackgroundColor: #fafafa;
+body {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    grid-template-rows: $headerHeight 150px 1fr 60px;
+    grid-template-areas: "header header" "filter search" "filter products" "footer footer";
+}
+
 .header {
+    grid-area: header;
     width: 100%;
     height: $headerHeight;
     background-color: $headerBackgroundColor;
@@ -133,18 +141,9 @@ $searchBackgroundColor: #fafafa;
     }
 }
 
-.content-wraper {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 20% 1fr;
-    grid-template-rows: 150px 1fr;
-    grid-template-areas: "filter search" "filter products";
-}
-
 .filter {
     grid-area: filter;
-    width: 22%;
-    height: 100%;
+    width: 100%;
     background-color: $filterBackground;
     &-container {
         padding: 1.5rem;
@@ -256,7 +255,7 @@ $searchBackgroundColor: #fafafa;
 
 .search {
     grid-area: search;
-    height: 150px;
+    height: 100%;
     width: 100%;
     background-color: $searchBackgroundColor;
     position: relative;
@@ -371,7 +370,9 @@ $searchBackgroundColor: #fafafa;
 }
 
 .footer {
-    height: 60px;
+    grid-area: footer;
+    width: 100%;
+    height: 100%;
     background-color: #333;
     color: white;
     .container {
