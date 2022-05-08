@@ -103,30 +103,29 @@ body {
 .header .cart {
   font-size: 1.5rem;
   position: relative;
-  font-size: 2.2rem;
-}
-
-.header .cart .cart-counter__wrapper {
-  position: absolute;
-  background-color: #7957d5;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  bottom: 50%;
-  left: 50%;
-  -webkit-transform: translate(-40%, 0%);
-          transform: translate(-40%, 0%);
+  font-size: 2rem;
 }
 
 .header .cart .cart-counter {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #7957d5;
+  width: 26px;
+  height: 26px;
+  border-radius: 100%;
   position: absolute;
   bottom: 50%;
-  left: 50%;
+  left: 30%;
   color: white;
   font-weight: 500;
   font-size: 1.1rem;
-  -webkit-transform: translate(-50%, 55%);
-          transform: translate(-50%, 55%);
 }
 
 .header .cart:hover {
@@ -138,6 +137,15 @@ body {
 
 .header .cart:active {
   opacity: 0.9;
+}
+
+.header .cart:disabled + {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.header .cart:disabled + .cart-counter__wrapper {
+  display: none;
 }
 
 .header .login {

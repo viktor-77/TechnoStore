@@ -74,12 +74,18 @@ function buildProductList() {
         function toggleProductToCart(e) {
 
             if (!Cart.includes(e.currentTarget.dataset.productId)) {
+                if (document.querySelector('.cart-counter').classList.contains('displayNone')) {
+                    document.querySelector('.cart-counter').classList.remove('displayNone');
+                }
                 Cart.push(e.currentTarget.dataset.productId);
                 document.querySelector('.cart-counter').textContent = Cart.length;
 
             } else {
                 Cart.splice(Cart.indexOf(e.currentTarget.dataset.productId), 1)
                 document.querySelector('.cart-counter').textContent = Cart.length;
+                if (!Cart.length) {
+                    document.querySelector('.cart-counter').classList.add('displayNone');
+                }
             }
             e.currentTarget.parentElement.parentElement.children[0].classList.toggle('displayNone');
             e.currentTarget.children[0].classList.toggle('displayNone');
