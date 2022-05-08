@@ -45,47 +45,56 @@ buildFilter();
 
 
 //   product builder
-let productContainer = document.querySelector('.product__container');
-let productBox = document.querySelector('.product__box');
-let productImg = document.querySelector('.product__img');
-let productName = document.querySelector('.product__name');
-let productPrice = document.querySelector('.product__price');
-let productActions = document.querySelector('.product__actions');
+function buildProductList() {
+    let productContainer = document.querySelector('.product__container');
+    let productBox = document.querySelector('.product__box');
+    let productImg = document.querySelector('.product__img');
+    let productName = document.querySelector('.product__name');
+    let productPrice = document.querySelector('.product__price');
+    let productActions = document.querySelector('.product__actions');
 
-SelectedProducts.forEach(product => {
-    // let productBoxClone = productBox.cloneNode(true);
-    let productImgClone = productImg.cloneNode(true);
-    let productNameClone = productName.cloneNode(true);
-    let productPriceClone = productPrice.cloneNode(true);
-    let productActionsClone = productActions.cloneNode(true);
-
-    productImgClone.firstElementChild.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSFkuXSLa5TrDQHqAiq_uzv7X7I0kCpKfRkXJIhjgqvkrRDq2HZ_TI2h0f04dK5eRiIDGrEvtOiiA&usqp=CAc');
-    productNameClone.textContent = product.name;
-    productPriceClone.textContent = product.price;
-
-    productActionsClone.firstElementChild.dataset.productId = product.id;
-    productActionsClone.firstElementChild.addEventListener('click', addToCart);
-
-    function addToCart(e) {
-        if (!Cart.includes(e.currentTarget.dataset.productId)) {
-            Cart.push(e.currentTarget.dataset.productId);
-            document.querySelector('.cart-counter').textContent = Cart.length;
-        }
-        console.log(Cart);
-
+    for (let i = 1; i < productContainer.children.length; i++) {
+        productContainer.children[i].remove();
     }
+    console.log(productContainer.children.length);
 
-    let productBoxClone = document.createElement('div');
-    productBoxClone.classList.add('product__box');
-    productBoxClone.append(productImgClone);
-    productBoxClone.append(productNameClone);
-    productBoxClone.append(productPriceClone);
-    productBoxClone.append(productActionsClone);
+    SelectedProducts.forEach(product => {
+        // let productBoxClone = productBox.cloneNode(true);
+        let productImgClone = productImg.cloneNode(true);
+        let productNameClone = productName.cloneNode(true);
+        let productPriceClone = productPrice.cloneNode(true);
+        let productActionsClone = productActions.cloneNode(true);
 
-    productContainer.append(productBoxClone);
+        productImgClone.firstElementChild.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSFkuXSLa5TrDQHqAiq_uzv7X7I0kCpKfRkXJIhjgqvkrRDq2HZ_TI2h0f04dK5eRiIDGrEvtOiiA&usqp=CAc');
+        productNameClone.textContent = product.name;
+        productPriceClone.textContent = product.price;
 
-})
-productBox.remove();
+        productActionsClone.firstElementChild.dataset.productId = product.id;
+        productActionsClone.firstElementChild.addEventListener('click', addToCart);
+
+        function addToCart(e) {
+            if (!Cart.includes(e.currentTarget.dataset.productId)) {
+                Cart.push(e.currentTarget.dataset.productId);
+                document.querySelector('.cart-counter').textContent = Cart.length;
+            }
+            console.log(Cart);
+
+        }
+
+        let productBoxClone = document.createElement('div');
+        productBoxClone.classList.add('product__box');
+        productBoxClone.append(productImgClone);
+        productBoxClone.append(productNameClone);
+        productBoxClone.append(productPriceClone);
+        productBoxClone.append(productActionsClone);
+
+        productContainer.append(productBoxClone);
+
+    })
+    productBox.remove();
+}
+buildProductList();
+
 
 
 function calcFilterCountlinkers() {
@@ -251,6 +260,7 @@ function updateOnCheckboxClick(e) {
         }
     }
     calcFilterCountlinkers();
+    buildProductList()
     console.log(SelectedProducts);
 
 }
