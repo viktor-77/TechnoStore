@@ -66,7 +66,7 @@ let phones = [{
         diagonal: '6',
         imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
         brend: "iphone",
-        name: "iphone10",
+        name: "xiomi",
     },
     {
         id: 7,

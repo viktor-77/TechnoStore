@@ -1,7 +1,7 @@
 import productList from "./productlist.js";
 
-let FilterOptionsLists = {};
-productList.categories.forEach((i) => (FilterOptionsLists[i] = [])); // form filterList
+let FilterOptionsList = {};
+productList.categories.forEach((i) => (FilterOptionsList[i] = [])); // form filterList
 let SelectedProducts = productList.phones;
 let filterError = false;
 let Cart = []
@@ -33,7 +33,7 @@ function buildFilter() {
             filterRowClone.children[0].name = category + '_' + filterOption;
             filterBowClone.append(filterRowClone);
 
-            filterRowClone.children[0].addEventListener("click", updateOnCheckboxClick); //function for updating checkboxes counters and states
+            filterRowClone.children[0].addEventListener("click", onCheckboxClick); //function for updating checkboxes counters and states
         });
 
         filterBowClone.children[1].remove();
@@ -43,9 +43,7 @@ function buildFilter() {
 }
 buildFilter();
 
-
-//   product builder
-function buildProductList() {
+function buildProductList() { //calcFilterCountlinkers calls this function
     let productContainer = document.querySelector('.product__container');
     let productCartIndicator = document.querySelector('.cart-active');
     let productImg = document.querySelector('.product__img');
@@ -105,10 +103,9 @@ function buildProductList() {
         productContainer.append(productBoxClone);
     })
 }
+buildProductList();
 
-
-
-function calcFilterCountlinkers() {
+function calcFilterCounter() {
     let checkboxes = document.querySelectorAll(".filter-checkbox__input");
     let checkboxesCounters = document.querySelectorAll(".filter-checkbox__product-counter");
 
@@ -118,28 +115,26 @@ function calcFilterCountlinkers() {
         let filterCounterUnChecked = 0;
         let filterCounterChecked = 0;
 
-        if (FilterOptionsLists[filterCategory].indexOf(filterOption) != -1) { //make checkbox unchecked for calculating filterCounterUnChecked
-            FilterOptionsLists[filterCategory].splice(
-                FilterOptionsLists[filterCategory].indexOf(filterOption),
+        if (FilterOptionsList[filterCategory].indexOf(filterOption) != -1) { //make checkbox unchecked for calculating filterCounterUnChecked
+            FilterOptionsList[filterCategory].splice(
+                FilterOptionsList[filterCategory].indexOf(filterOption),
                 1
             );
         }
         productList.phones.forEach((product) => { // counting resulting products amount if current checkbox unchecked
             let productCheck = true;
-            for (let category in FilterOptionsLists) {
+            for (let category in FilterOptionsList) {
                 if (category === 'textFilter') {
                     let productName = product["name"].split(' ').join('').toLowerCase();
-                    let filterTextParameter = FilterOptionsLists[category].split(' ').join('').toLowerCase();
+                    let filterTextParameter = FilterOptionsList[category].split(' ').join('').toLowerCase();
                     if (!productName.includes(filterTextParameter)) {
                         productCheck = false;
                         break;
                     }
                 } else
-                if (!FilterOptionsLists[category].length) {
+                if (!FilterOptionsList[category].length) {
                     continue;
-                    console.log();
-
-                } else if (!FilterOptionsLists[category].includes(product[category])) {
+                } else if (!FilterOptionsList[category].includes(product[category])) {
                     productCheck = false;
                     break;
                 }
@@ -147,23 +142,21 @@ function calcFilterCountlinkers() {
             if (productCheck) filterCounterUnChecked++;
         });
 
-        FilterOptionsLists[filterCategory].push(filterOption);
+        FilterOptionsList[filterCategory].push(filterOption);
         productList.phones.forEach((product) => { // counting resulting products amount if current checkbox checked
             let productCheck = true;
-            for (let category in FilterOptionsLists) {
+            for (let category in FilterOptionsList) {
                 if (category === 'textFilter') {
                     let productName = product["name"].split(' ').join('').toLowerCase();
-                    let filterTextParameter = FilterOptionsLists[category].split(' ').join('').toLowerCase();
+                    let filterTextParameter = FilterOptionsList[category].split(' ').join('').toLowerCase();
                     if (!productName.includes(filterTextParameter)) {
                         productCheck = false;
                         break;
                     }
                 } else
-                if (!FilterOptionsLists[category].length) {
+                if (!FilterOptionsList[category].length) {
                     continue;
-                    console.log();
-
-                } else if (!FilterOptionsLists[category].includes(product[category])) {
+                } else if (!FilterOptionsList[category].includes(product[category])) {
                     productCheck = false;
                     break;
                 }
@@ -210,75 +203,78 @@ function calcFilterCountlinkers() {
         }
 
         if (!checkboxes[checkboxIndex].checked) { // return initial filter list parameters
-            FilterOptionsLists[filterCategory].splice(
-                FilterOptionsLists[filterCategory].indexOf(filterOption),
+            FilterOptionsList[filterCategory].splice(
+                FilterOptionsList[filterCategory].indexOf(filterOption),
                 1
             );
         }
     });
-    buildProductList()
-    console.log(SelectedProducts);
-    console.log(FilterOptionsLists);
-
 }
-calcFilterCountlinkers();
+calcFilterCounter();
 
-function updateOnCheckboxClick(e) {
+function onCheckboxClick(e) {
     let currentCheckbox = e.currentTarget;
     let selectedCategory = currentCheckbox.name.split('_')[0];
     let selectedOption = currentCheckbox.name.split('_')[1];
 
-    if (FilterOptionsLists[selectedCategory].indexOf(selectedOption) == -1) { // updating filter list(list with filter categories and their options)
-        FilterOptionsLists[selectedCategory].push(selectedOption);
-    } else {
-        FilterOptionsLists[selectedCategory].splice(
-            FilterOptionsLists[selectedCategory].indexOf(selectedOption),
-            1
-        );
-    }
+    function updateFilterOnCheckboxClick() {
 
-    function filterProducts() {
-        SelectedProducts = [];
-        productList.phones.forEach((product) => {
-            let productCheck = true;
-            for (let category in FilterOptionsLists) {
-                if (category === 'textFilter') {
-                    let productName = product["name"].split(' ').join('').toLowerCase();
-                    let filterTextParameter = FilterOptionsLists[category].split(' ').join('').toLowerCase();
-                    if (!productName.includes(filterTextParameter)) {
-                        productCheck = false;
-                        break;
-                    }
-                } else
-                if (!FilterOptionsLists[category].length) {
-                    continue;
-                    console.log();
-
-                } else if (!FilterOptionsLists[category].includes(product[category])) {
-                    productCheck = false;
-                    break;
-                }
-            }
-            if (productCheck) SelectedProducts.push(product);
-        });
-    }
-
-    if (currentCheckbox.checked) { // making resulting product list 
-        filterProducts();
-    } else {
-        if (!FilterOptionsLists[selectedCategory].length) { // updating sortedList when unchecked last option in current category
-            filterProducts();
-        } else { // delete from sortedList elements that have deleted option
-            SelectedProducts = SelectedProducts.filter(
-                (it) => it[selectedCategory] != selectedOption
+        if (FilterOptionsList[selectedCategory].indexOf(selectedOption) == -1) { // updating filter list(list with filter categories and their options)
+            FilterOptionsList[selectedCategory].push(selectedOption);
+        } else {
+            FilterOptionsList[selectedCategory].splice(
+                FilterOptionsList[selectedCategory].indexOf(selectedOption),
+                1
             );
         }
     }
-    calcFilterCountlinkers();
+    updateFilterOnCheckboxClick();
+
+    function getFilteredProductList() {
+        function filterProducts() {
+            SelectedProducts = [];
+            productList.phones.forEach((product) => {
+                let productCheck = true;
+                for (let category in FilterOptionsList) {
+                    if (category === 'textFilter') {
+                        let productName = product["name"].split(' ').join('').toLowerCase();
+                        let filterTextParameter = FilterOptionsList[category].split(' ').join('').toLowerCase();
+                        if (!productName.includes(filterTextParameter)) {
+                            productCheck = false;
+                            break;
+                        }
+                    } else
+                    if (!FilterOptionsList[category].length) {
+                        continue;
+                    } else if (!FilterOptionsList[category].includes(product[category])) {
+                        productCheck = false;
+                        break;
+                    }
+                }
+                if (productCheck) SelectedProducts.push(product);
+            });
+        }
+
+        if (currentCheckbox.checked) { // making resulting product list 
+            filterProducts();
+        } else {
+            if (!FilterOptionsList[selectedCategory].length) { // updating sortedList when unchecked last option in current category
+                filterProducts();
+            } else { // delete from sortedList elements that have deleted option
+                SelectedProducts = SelectedProducts.filter(
+                    (it) => it[selectedCategory] != selectedOption
+                );
+            }
+        }
+    }
+    getFilteredProductList();
+    console.log(SelectedProducts);
+    calcFilterCounter();
+    buildProductList();
 }
 
 
-{ //  close filter block
+{ //  closing filter bar
     let filterToggleIcons = document.querySelectorAll(".filter-toggle");
     filterToggleIcons.forEach((icon) => icon.addEventListener("click", switchFilterBox));
 
@@ -294,6 +290,40 @@ function updateOnCheckboxClick(e) {
     }
 }
 
+{ //search filter
+    let searchBlock = document.querySelector('.search input');
+    searchBlock.addEventListener('keyup', sortByTextFilter);
+
+    function sortByTextFilter(e) {
+        FilterOptionsList['textFilter'] = e.currentTarget.value;
+        SelectedProducts = [];
+        productList.phones.forEach((product) => {
+            let productCheck = true;
+            for (let category in FilterOptionsList) {
+                if (category === 'textFilter') {
+                    let productName = product["name"].split(' ').join('').toLowerCase();
+                    let filterTextParameter = FilterOptionsList[category].split(' ').join('').toLowerCase();
+
+                    if (!productName.includes(filterTextParameter)) {
+                        productCheck = false;
+                        break;
+                    }
+                } else if (!FilterOptionsList[category].length) {
+                    continue;
+
+                } else if (!FilterOptionsList[category].includes(product[category])) {
+                    productCheck = false;
+                    break;
+                }
+            }
+            if (productCheck) SelectedProducts.push(product);
+        });
+        calcFilterCounter();
+        buildProductList();
+    }
+
+}
+
 { //  clear search   
     let eraseButton = document.querySelector(".search-erase");
     let searchInput = document.querySelector(".search input");
@@ -303,48 +333,11 @@ function updateOnCheckboxClick(e) {
 
 
     function resetSearchText(e) {
-        if (e.type === 'click') {
+        if ((e.type === 'click') || ((e.type === 'keyup') && e.keyCode == 27)) {
             searchInput.value = '';
-            FilterOptionsLists['textFilter'] = '';
-            calcFilterCountlinkers();
-        } else if ((e.type === 'keyup') && e.keyCode == 27) {
-            searchInput.value = '';
-            FilterOptionsLists['textFilter'] = '';
+            FilterOptionsList['textFilter'] = '';
         }
+        calcFilterCounter();
+        buildProductList();
     }
-}
-
-{ //search filter
-    let searchBlock = document.querySelector('.search input');
-    searchBlock.addEventListener('keyup', sortByTextFilter);
-
-    function sortByTextFilter(e) {
-        let textFilter = e.currentTarget.value;
-        FilterOptionsLists['textFilter'] = textFilter;
-        console.log(FilterOptionsLists);
-        SelectedProducts = [];
-        productList.phones.forEach((product) => {
-            let productCheck = true;
-            for (let category in FilterOptionsLists) {
-                if (category === 'textFilter') {
-                    let productName = product["name"].split(' ').join('').toLowerCase();
-                    let filterTextParameter = FilterOptionsLists[category].split(' ').join('').toLowerCase();
-
-                    if (!productName.includes(filterTextParameter)) {
-                        productCheck = false;
-                        break;
-                    }
-                } else if (!FilterOptionsLists[category].length) {
-                    continue;
-
-                } else if (!FilterOptionsLists[category].includes(product[category])) {
-                    productCheck = false;
-                    break;
-                }
-            }
-            if (productCheck) SelectedProducts.push(product);
-            calcFilterCountlinkers();
-        });
-    }
-
 }

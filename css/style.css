@@ -169,6 +169,7 @@ body {
 }
 
 .filter {
+  height: 100vh;
   -ms-grid-row: 2;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
@@ -438,6 +439,8 @@ body {
 
 .product__box_active {
   background-color: rgba(121, 87, 213, 0.1);
+  -webkit-box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.6);
+          box-shadow: 2px 2px 10px rgba(128, 128, 128, 0.6);
 }
 
 .product .cart-active {

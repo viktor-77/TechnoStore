@@ -151,6 +151,7 @@ body {
 }
 
 .filter {
+    height: 100vh;
     grid-area: filter;
     background-color: $filterBackground;
     box-shadow: 0 0 10px grey;
@@ -341,6 +342,7 @@ body {
         }
         &_active {
             background-color: rgba($color: $color_1, $alpha: 0.1);
+            box-shadow: 2px 2px 10px rgba($color: grey, $alpha: 0.6);
         }
     }
     .cart-active {
