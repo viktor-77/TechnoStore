@@ -47,19 +47,16 @@ buildFilter();
 //   product builder
 function buildProductList() {
     let productContainer = document.querySelector('.product__container');
-    let productBox = document.querySelector('.product__box');
     let productImg = document.querySelector('.product__img');
     let productName = document.querySelector('.product__name');
     let productPrice = document.querySelector('.product__price');
     let productActions = document.querySelector('.product__actions');
 
-    for (let i = 1; i < productContainer.children.length; i++) {
-        productContainer.children[i].remove();
+    while (productContainer.children.length) {
+        productContainer.removeChild(productContainer.firstElementChild);
     }
-    console.log(productContainer.children.length);
 
     SelectedProducts.forEach(product => {
-        // let productBoxClone = productBox.cloneNode(true);
         let productImgClone = productImg.cloneNode(true);
         let productNameClone = productName.cloneNode(true);
         let productPriceClone = productPrice.cloneNode(true);
@@ -68,8 +65,8 @@ function buildProductList() {
         productImgClone.firstElementChild.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSFkuXSLa5TrDQHqAiq_uzv7X7I0kCpKfRkXJIhjgqvkrRDq2HZ_TI2h0f04dK5eRiIDGrEvtOiiA&usqp=CAc');
         productNameClone.textContent = product.name;
         productPriceClone.textContent = product.price;
-
         productActionsClone.firstElementChild.dataset.productId = product.id;
+
         productActionsClone.firstElementChild.addEventListener('click', addToCart);
 
         function addToCart(e) {
@@ -77,8 +74,6 @@ function buildProductList() {
                 Cart.push(e.currentTarget.dataset.productId);
                 document.querySelector('.cart-counter').textContent = Cart.length;
             }
-            console.log(Cart);
-
         }
 
         let productBoxClone = document.createElement('div');
@@ -89,11 +84,8 @@ function buildProductList() {
         productBoxClone.append(productActionsClone);
 
         productContainer.append(productBoxClone);
-
     })
-    productBox.remove();
 }
-buildProductList();
 
 
 
@@ -205,6 +197,10 @@ function calcFilterCountlinkers() {
             );
         }
     });
+    buildProductList()
+    console.log(SelectedProducts);
+    console.log(FilterOptionsLists);
+
 }
 calcFilterCountlinkers();
 
@@ -260,9 +256,6 @@ function updateOnCheckboxClick(e) {
         }
     }
     calcFilterCountlinkers();
-    buildProductList()
-    console.log(SelectedProducts);
-
 }
 
 
