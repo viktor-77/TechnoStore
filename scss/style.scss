@@ -60,7 +60,6 @@ body {
 .header {
     grid-area: header;
     z-index: 900000;
-    width: 100%;
     height: $headerHeight;
     background-color: $headerBackgroundColor;
     color: $headerFontColor;
@@ -153,11 +152,10 @@ body {
 
 .filter {
     grid-area: filter;
-    width: 100%;
-    max-height: 100%;
     background-color: $filterBackground;
     box-shadow: 0 0 10px grey;
-    z-index: 1000000;
+    z-index: 10000;
+    overflow-y: scroll;
     &-container {
         padding: 1.5rem;
     }
@@ -271,8 +269,6 @@ body {
 
 .search {
     grid-area: search;
-    height: 100%;
-    width: 100%;
     background-color: $searchBackgroundColor;
     position: relative;
     display: flex;
@@ -318,7 +314,6 @@ body {
 
 .product {
     grid-area: products;
-    width: 100%;
     background-color: rgba($color: grey, $alpha: 0.1);
     &__container {
         padding: 40px;
@@ -344,6 +339,9 @@ body {
         &:hover {
             box-shadow: 2px 2px 14px rgba($color: grey, $alpha: 0.8);
         }
+        &_active {
+            background-color: rgba($color: $color_1, $alpha: 0.1);
+        }
     }
     .cart-active {
         color: rgba($color: black, $alpha: 0.8);
@@ -365,7 +363,7 @@ body {
         width: 150px;
         text-align: center;
         img {
-            width: 100%;
+            max-width: 100%;
         }
     }
     &__name {
@@ -419,9 +417,9 @@ body {
 }
 
 .footer {
-    grid-area: footer;
-    width: 100%;
     height: 100%;
+    z-index: 9999999999999999999;
+    grid-area: footer;
     background-color: #333;
     color: white;
     .container {

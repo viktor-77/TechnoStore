@@ -1,5 +1,4 @@
-let phones = [
-    {
+let phones = [{
         id: 1,
         brend: "iphone",
         price: 35000,
@@ -8,6 +7,7 @@ let phones = [
         RAM: '4',
         diagonal: '6',
         name: "samsung",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
 
     },
     {
@@ -19,6 +19,8 @@ let phones = [
         RAM: '4',
         diagonal: '6',
         name: "samsung",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/c/b/cb6c9bac9ba2a3b8d3dad7b4a853f073.jpg",
+
 
     },
     {
@@ -30,6 +32,8 @@ let phones = [
         RAM: '4',
         diagonal: '6',
         name: "samsung",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/0/f0d6220fced4340d7416453f1a6602bb.jpg",
+
     },
     {
         id: 4,
@@ -38,6 +42,7 @@ let phones = [
         color: "green",
         memory: '32',
         RAM: '4',
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
         diagonal: '6',
         name: "iphone10",
     },
@@ -48,6 +53,7 @@ let phones = [
         color: "grey",
         memory: '64',
         RAM: '4',
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
         diagonal: '6',
         name: "iphone10",
     },
@@ -58,6 +64,7 @@ let phones = [
         memory: '64',
         RAM: '4',
         diagonal: '6',
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
         brend: "iphone",
         name: "iphone10",
     },
@@ -66,6 +73,7 @@ let phones = [
         brend: "iphone",
         price: '21500',
         color: "grey",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
         memory: '32',
         RAM: '3',
         diagonal: '6',
@@ -74,6 +82,7 @@ let phones = [
     {
         id: 8,
         brend: "xiomi",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/2/c/2cd15987d62ce0fd2bb0ccdc1999eaa4.jpg",
         price: '35000',
         color: "grey",
         memory: '64',
@@ -84,6 +93,7 @@ let phones = [
 
     {
         id: 9,
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/e/2/e2f92635f1c8d9e1bbe5814153bbb0c5.jpg",
         brend: "iphone",
         price: '29000',
         color: "grey",
@@ -94,6 +104,7 @@ let phones = [
     },
     {
         id: 10,
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/e/2/e2f92635f1c8d9e1bbe5814153bbb0c5.jpg",
         brend: "iphone",
         price: '29000',
         color: "grey",
@@ -107,6 +118,7 @@ let phones = [
         brend: "iphone",
         price: '28000',
         color: "grey",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
         memory: '32',
         RAM: '3',
         diagonal: '4',
@@ -117,6 +129,7 @@ let phones = [
         brend: "iphone",
         price: '10000',
         color: "grey",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
         memory: '32',
         RAM: '3',
         diagonal: '5',
@@ -127,6 +140,7 @@ let phones = [
         brend: "iphone",
         price: '10000',
         color: "red",
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
         memory: '32',
         RAM: '3',
         diagonal: '5',
@@ -134,6 +148,7 @@ let phones = [
     },
     {
         id: 14,
+        imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/e/2/e2f92635f1c8d9e1bbe5814153bbb0c5.jpg",
         brend: "iphone",
         price: '9000',
         color: "yellow",
@@ -147,7 +162,7 @@ let phones = [
 let categories = [];
 phones.map(item => {
     for (let cat in item) {
-        if (cat === 'price' || cat === 'id' || cat === 'name') continue;
+        if (cat === 'price' || cat === 'id' || cat === 'name' || cat === 'imgSrc') continue;
         if (!categories.includes(cat)) categories.push(cat);
     }
 })

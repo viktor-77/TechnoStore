@@ -64,7 +64,7 @@ function buildProductList() {
         let productPriceClone = productPrice.cloneNode(true);
         let productActionsClone = productActions.cloneNode(true);
 
-        productImgClone.firstElementChild.setAttribute('src', 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSFkuXSLa5TrDQHqAiq_uzv7X7I0kCpKfRkXJIhjgqvkrRDq2HZ_TI2h0f04dK5eRiIDGrEvtOiiA&usqp=CAc');
+        productImgClone.firstElementChild.setAttribute('src', product.imgSrc);
         productNameClone.textContent = product.name;
         productPriceClone.textContent = product.price;
         productActionsClone.firstElementChild.dataset.productId = product.id;
@@ -78,9 +78,11 @@ function buildProductList() {
                     document.querySelector('.cart-counter').classList.remove('displayNone');
                 }
                 Cart.push(e.currentTarget.dataset.productId);
+                e.currentTarget.parentElement.parentElement.classList.add('product__box_active');
                 document.querySelector('.cart-counter').textContent = Cart.length;
 
             } else {
+                e.currentTarget.parentElement.parentElement.classList.remove('product__box_active');
                 Cart.splice(Cart.indexOf(e.currentTarget.dataset.productId), 1)
                 document.querySelector('.cart-counter').textContent = Cart.length;
                 if (!Cart.length) {

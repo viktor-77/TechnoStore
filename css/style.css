@@ -42,7 +42,6 @@ body {
   -ms-grid-column-span: 2;
   grid-area: header;
   z-index: 900000;
-  width: 100%;
   height: 110px;
   background-color: #333;
   color: white;
@@ -174,12 +173,11 @@ body {
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
   grid-area: filter;
-  width: 100%;
-  max-height: 100%;
   background-color: #f2f2f2;
   -webkit-box-shadow: 0 0 10px grey;
           box-shadow: 0 0 10px grey;
-  z-index: 1000000;
+  z-index: 10000;
+  overflow-y: scroll;
 }
 
 .filter-container {
@@ -331,8 +329,6 @@ body {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: search;
-  height: 100%;
-  width: 100%;
   background-color: rgba(128, 128, 128, 0.1);
   position: relative;
   display: -webkit-box;
@@ -396,7 +392,6 @@ body {
   -ms-grid-row: 3;
   -ms-grid-column: 2;
   grid-area: products;
-  width: 100%;
   background-color: rgba(128, 128, 128, 0.1);
 }
 
@@ -441,6 +436,10 @@ body {
           box-shadow: 2px 2px 14px rgba(128, 128, 128, 0.8);
 }
 
+.product__box_active {
+  background-color: rgba(121, 87, 213, 0.1);
+}
+
 .product .cart-active {
   color: rgba(0, 0, 0, 0.8);
   font-size: 2rem;
@@ -465,7 +464,7 @@ body {
 }
 
 .product__img img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .product__name {
@@ -539,12 +538,12 @@ body {
 }
 
 .footer {
+  height: 100%;
+  z-index: 9999999999999999999;
   -ms-grid-row: 4;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
   grid-area: footer;
-  width: 100%;
-  height: 100%;
   background-color: #333;
   color: white;
 }
