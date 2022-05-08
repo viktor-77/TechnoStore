@@ -47,6 +47,7 @@ buildFilter();
 //   product builder
 function buildProductList() {
     let productContainer = document.querySelector('.product__container');
+    let productCartIndicator = document.querySelector('.cart-active');
     let productImg = document.querySelector('.product__img');
     let productName = document.querySelector('.product__name');
     let productPrice = document.querySelector('.product__price');
@@ -57,6 +58,7 @@ function buildProductList() {
     }
 
     SelectedProducts.forEach(product => {
+        let productCartIndicatorClone = productCartIndicator.cloneNode(true);
         let productImgClone = productImg.cloneNode(true);
         let productNameClone = productName.cloneNode(true);
         let productPriceClone = productPrice.cloneNode(true);
@@ -67,17 +69,26 @@ function buildProductList() {
         productPriceClone.textContent = product.price;
         productActionsClone.firstElementChild.dataset.productId = product.id;
 
-        productActionsClone.firstElementChild.addEventListener('click', addToCart);
+        productActionsClone.firstElementChild.addEventListener('click', toggleProductToCart);
 
-        function addToCart(e) {
+        function toggleProductToCart(e) {
+
             if (!Cart.includes(e.currentTarget.dataset.productId)) {
                 Cart.push(e.currentTarget.dataset.productId);
                 document.querySelector('.cart-counter').textContent = Cart.length;
+
+            } else {
+                Cart.splice(Cart.indexOf(e.currentTarget.dataset.productId), 1)
+                document.querySelector('.cart-counter').textContent = Cart.length;
             }
+            e.currentTarget.parentElement.parentElement.children[0].classList.toggle('displayNone');
+            e.currentTarget.children[0].classList.toggle('displayNone');
+            e.currentTarget.children[1].classList.toggle('displayNone');
         }
 
         let productBoxClone = document.createElement('div');
         productBoxClone.classList.add('product__box');
+        productBoxClone.append(productCartIndicatorClone);
         productBoxClone.append(productImgClone);
         productBoxClone.append(productNameClone);
         productBoxClone.append(productPriceClone);
