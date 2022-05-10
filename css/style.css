@@ -366,7 +366,7 @@ body {
 }
 
 .search input:focus {
-  background-color: rgba(221, 221, 221, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .search .search-erase {

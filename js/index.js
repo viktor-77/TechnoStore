@@ -4,7 +4,7 @@ let FilterOptionsList = {};
 productList.categories.forEach((i) => (FilterOptionsList[i] = [])); // form filterList
 let SelectedProducts = productList.phones;
 let filterError = false;
-let Cart = []
+let Cart = [];
 
 
 function buildFilter() {
@@ -62,6 +62,32 @@ function buildProductList() { //calcFilterCountlinkers calls this function
         let productPriceClone = productPrice.cloneNode(true);
         let productActionsClone = productActions.cloneNode(true);
 
+        if (!Cart.includes(+product.id)) {
+            if (!productCartIndicatorClone.classList.contains('displayNone')) {
+                productCartIndicatorClone.classList.add('displayNone');
+            }
+
+            if (productActionsClone.firstElementChild.firstElementChild.classList.contains('displayNone')) {
+                productActionsClone.firstElementChild.firstElementChild.classList.remove('displayNone');
+            }
+
+            if (!productActionsClone.firstElementChild.children[1].classList.contains('displayNone')) {
+                productActionsClone.firstElementChild.children[1].classList.add('displayNone');
+            }
+        } else {
+            if (productCartIndicatorClone.classList.contains('displayNone')) {
+                productCartIndicatorClone.classList.remove('displayNone');
+            }
+
+            if (!productActionsClone.firstElementChild.firstElementChild.classList.contains('displayNone')) {
+                productActionsClone.firstElementChild.firstElementChild.classList.add('displayNone');
+            }
+
+            if (productActionsClone.firstElementChild.children[1].classList.contains('displayNone')) {
+                productActionsClone.firstElementChild.children[1].classList.remove('displayNone');
+            }
+        }
+
         productImgClone.firstElementChild.setAttribute('src', product.imgSrc);
         productNameClone.textContent = product.name;
         productPriceClone.textContent = product.price;
@@ -70,36 +96,39 @@ function buildProductList() { //calcFilterCountlinkers calls this function
         productActionsClone.firstElementChild.addEventListener('click', toggleProductToCart);
 
         function toggleProductToCart(e) {
+            e.currentTarget.parentElement.parentElement.classList.remove('product__box_active');
 
-            if (!Cart.includes(e.currentTarget.dataset.productId)) {
-                if (document.querySelector('.cart-counter').classList.contains('displayNone')) {
-                    document.querySelector('.cart-counter').classList.remove('displayNone');
+            if (!Cart.includes(+e.currentTarget.dataset.productId)) {
+                Cart.push(+e.currentTarget.dataset.productId);
+                document.querySelector('.cart-counter').classList.remove('displayNone');
+                document.querySelector('.cart-counter').textContent = Cart.length;
+                if (!e.currentTarget.parentElement.parentElement.classList.contains('product__box_active')) {
+                    e.currentTarget.parentElement.parentElement.classList.add('product__box_active');
                 }
-                Cart.push(e.currentTarget.dataset.productId);
-                e.currentTarget.parentElement.parentElement.classList.add('product__box_active');
-                document.querySelector('.cart-counter').textContent = Cart.length;
-
             } else {
-                e.currentTarget.parentElement.parentElement.classList.remove('product__box_active');
-                Cart.splice(Cart.indexOf(e.currentTarget.dataset.productId), 1)
-                document.querySelector('.cart-counter').textContent = Cart.length;
+                Cart.splice(Cart.indexOf(+e.currentTarget.dataset.productId), 1);
                 if (!Cart.length) {
                     document.querySelector('.cart-counter').classList.add('displayNone');
                 }
+                document.querySelector('.cart-counter').textContent = Cart.length;
             }
             e.currentTarget.parentElement.parentElement.children[0].classList.toggle('displayNone');
             e.currentTarget.children[0].classList.toggle('displayNone');
             e.currentTarget.children[1].classList.toggle('displayNone');
+            console.log(Cart);
         }
 
         let productBoxClone = document.createElement('div');
         productBoxClone.classList.add('product__box');
+        if (Cart.includes(product.id)) {
+            productBoxClone.classList.add('product__box_active');
+        }
+
         productBoxClone.append(productCartIndicatorClone);
         productBoxClone.append(productImgClone);
         productBoxClone.append(productNameClone);
         productBoxClone.append(productPriceClone);
         productBoxClone.append(productActionsClone);
-
         productContainer.append(productBoxClone);
     })
 }
