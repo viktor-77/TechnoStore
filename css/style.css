@@ -26,6 +26,14 @@
           transform: rotate(180deg);
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 body {
   display: -ms-grid;
   display: grid;
@@ -99,13 +107,13 @@ body {
   color: #ccc;
 }
 
-.header .cart {
+.header__cart {
   font-size: 1.5rem;
   position: relative;
   font-size: 2rem;
 }
 
-.header .cart .cart-counter {
+.header__cart .cart-counter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -127,23 +135,23 @@ body {
   font-size: 1.1rem;
 }
 
-.header .cart:hover {
+.header__cart:hover {
   opacity: 0.8;
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   cursor: pointer;
 }
 
-.header .cart:active {
+.header__cart:active {
   opacity: 0.9;
 }
 
-.header .cart:disabled + {
+.header__cart:disabled + {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.header .cart:disabled + .cart-counter__wrapper {
+.header__cart:disabled + .cart-counter__wrapper {
   display: none;
 }
 
@@ -166,6 +174,230 @@ body {
 
 .header .login span:active {
   opacity: 1;
+}
+
+.cart {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999999999999999999999999999999999;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.cart__container {
+  padding: 2.5rem;
+  border-radius: 8px;
+  width: 55%;
+  height: 70%;
+  overflow-y: scroll;
+  background-color: #fff;
+}
+
+.cart__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 1.2rem 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.cart__header .heading {
+  font-weight: 500;
+  font-size: 1.6rem;
+}
+
+.cart__header .cart__close {
+  font-size: 1.6rem;
+  color: grey;
+  cursor: pointer;
+}
+
+.cart .product {
+  background-color: white;
+  padding: 2.2rem;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.cart .product__delete {
+  position: absolute;
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  right: 2.2rem;
+  top: 2.2rem;
+  padding: 10px;
+}
+
+.cart .product__delete:hover {
+  opacity: 0.8;
+}
+
+.cart .product__img {
+  max-width: 100px;
+}
+
+.cart .product__img img {
+  height: 150px;
+  width: 100%;
+}
+
+.cart .product__name {
+  position: absolute;
+  top: 140px;
+  left: 140px;
+}
+
+.cart .product__price {
+  position: absolute;
+  top: 160px;
+  left: 140px;
+}
+
+.cart .product__change {
+  font-size: 1rem;
+  font-weight: 500;
+  position: absolute;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  width: 300px;
+}
+
+.cart .product__input {
+  text-align: center;
+  width: 70px;
+  height: 35px;
+  font-size: 1.1rem;
+  padding: 8px;
+  border-radius: 6px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 2px solid #7a7a7a;
+}
+
+.cart .product__input:hover {
+  -webkit-box-shadow: 0 0 6px #7957d5;
+          box-shadow: 0 0 6px #7957d5;
+}
+
+.cart .product__input:focus {
+  -webkit-box-shadow: 0 0 3px #7957d5;
+          box-shadow: 0 0 3px #7957d5;
+}
+
+.cart .product__plus, .cart .product__minus {
+  cursor: pointer;
+  border: none;
+  background-color: #8f5db7;
+  -webkit-box-shadow: 1px 1px 2px #7957d5;
+          box-shadow: 1px 1px 2px #7957d5;
+  font-size: 1.2rem;
+  font-weight: 400;
+  padding: 10px;
+  color: white;
+  border-radius: 6px;
+}
+
+.cart .product__plus:hover, .cart .product__minus:hover {
+  -webkit-box-shadow: 1px 1px 6px #7957d5;
+          box-shadow: 1px 1px 6px #7957d5;
+}
+
+.cart .product__plus:active, .cart .product__minus:active {
+  opacity: 0.95;
+}
+
+.cart__total {
+  margin-top: 30px;
+  padding: 10px;
+  width: 220px;
+  margin-left: auto;
+  position: relative;
+  right: 30px;
+  border: 2px solid #7a7a7a;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 1px #8f5db7;
+          box-shadow: 0 0 1px #8f5db7;
+}
+
+.cart__total:hover {
+  -webkit-box-shadow: 0 0 3px #8f5db7;
+          box-shadow: 0 0 3px #8f5db7;
+}
+
+.cart__total-heading {
+  margin-bottom: 10px;
+}
+
+.cart__total-count {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.cart__total-button {
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #7957d5;
+  color: white;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  height: 40px;
+  -webkit-box-shadow: 0 0 3px #8f5db7;
+          box-shadow: 0 0 3px #8f5db7;
+}
+
+.cart__total-button:hover {
+  -webkit-box-shadow: 2px 2px 6px #8f5db7;
+          box-shadow: 2px 2px 6px #8f5db7;
+}
+
+.cart__total-button:active {
+  opacity: 0.95;
 }
 
 .filter {
@@ -366,6 +598,8 @@ body {
 }
 
 .search input:focus {
+  -webkit-box-shadow: 0 0 7px #7957d5;
+          box-shadow: 0 0 7px #7957d5;
   background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -541,7 +775,6 @@ body {
 }
 
 .footer {
-  height: 100%;
   z-index: 9999999999999999999;
   -ms-grid-row: 4;
   -ms-grid-column: 1;
