@@ -4,50 +4,7 @@ let FilterOptionsList = {};
 productList.categories.forEach((i) => (FilterOptionsList[i] = [])); // form filterList
 let SelectedProducts = productList.phones;
 let filterError = false;
-let Cart = [
-   {
-      id: 6,
-      price: '35000',
-      color: "green",
-      memory: '64',
-      RAM: '4',
-      diagonal: '6',
-      imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
-      brend: "iphone",
-      name: "xiomi",
-   }, {
-      id: 7,
-      brend: "iphone",
-      price: '21500',
-      color: "grey",
-      imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
-      memory: '32',
-      RAM: '3',
-      diagonal: '6',
-      name: "iphone10",
-   },
-   {
-      id: 6,
-      price: '35000',
-      color: "green",
-      memory: '64',
-      RAM: '4',
-      diagonal: '6',
-      imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/f/4/f4b167fdf1663cf7ee3bc93ca4d70d45.jpg",
-      brend: "iphone",
-      name: "xiomi",
-   }, {
-      id: 7,
-      brend: "iphone",
-      price: '21500',
-      color: "grey",
-      imgSrc: "https://i.citrus.world/imgcache/size_180/uploads/shop/0/4/045b5daa7a904e30aa14f8cbaf8e6d8d.jpg",
-      memory: '32',
-      RAM: '3',
-      diagonal: '6',
-      name: "iphone10",
-   },
-];
+let Cart = [];
 
 
 function buildFilter() {
@@ -121,9 +78,14 @@ function buildProductList() { //calcFilterCountlinkers calls this function
       productActionsClone.firstElementChild.dataset.productId = product.id;
       productActionsClone.firstElementChild.addEventListener('click', toggleProductToCart);
       function toggleProductToCart(e) {
+
          e.currentTarget.parentElement.parentElement.classList.remove('product__box_active');
-         if (!Cart.includes(+e.currentTarget.dataset.productId)) {
-            Cart.push(+e.currentTarget.dataset.productId);
+
+         let searchedProduct = SelectedProducts.find((product) =>
+            product.id == productActionsClone.firstElementChild.dataset.productId)
+
+         if (!Cart.includes(searchedProduct)) {
+            Cart.push(searchedProduct);
             document.querySelector('.cart-counter').classList.remove('displayNone');
             document.querySelector('.cart-counter').textContent = Cart.length;
             if (!e.currentTarget.parentElement.parentElement.classList.contains('product__box_active')) {
@@ -139,6 +101,7 @@ function buildProductList() { //calcFilterCountlinkers calls this function
          e.currentTarget.parentElement.parentElement.children[0].classList.toggle('displayNone');
          e.currentTarget.children[0].classList.toggle('displayNone');
          e.currentTarget.children[1].classList.toggle('displayNone');
+
          console.log(Cart);
       }
       let productBoxClone = document.createElement('div');
@@ -380,102 +343,100 @@ function onCheckboxClick(e) {
 }
 
 { //Cart
+   document.querySelector('.header-cart').onclick = function showCart() {
+      for (let product of Cart) {
+         let productBox = document.createElement('div');
+         productBox.classList.add('cart__product', 'product');
 
-   for (let product of Cart) {
-      let productBox = document.createElement('div');
-      productBox.classList.add('cart__product', 'product');
+         let productImg = document.createElement('div');
+         productImg.classList.add('product__img');
+         productImg.insertAdjacentHTML("afterbegin",
+            `<img src="${product.imgSrc}" alt = "product-img" >`);
 
-      let productImg = document.createElement('div');
-      productImg.classList.add('product__img');
-      productImg.insertAdjacentHTML("afterbegin",
-         `<img src="${product.imgSrc}" alt = "product-img" >`);
+         let productName = document.createElement('div');
+         productName.classList.add('product__name');
+         productName.innerText = product.name;
 
-      let productName = document.createElement('div');
-      productName.classList.add('product__name');
-      productName.innerText = product.name;
+         let productPrice = document.createElement('div');
+         productPrice.classList.add('product__price');
+         productPrice.innerText = product.price;
 
-      let productPrice = document.createElement('div');
-      productPrice.classList.add('product__price');
-      productPrice.innerText = product.price;
+         productBox.prepend(productImg, productName, productPrice);
+         productBox.insertAdjacentHTML('beforeend',
+            `<div class="product__delete">
+               <i class="fa-solid fa-trash-can"></i>
+               <i class="fa-solid fa-trash-can-xmark"></i>
+            </div>`);
+         productBox.insertAdjacentHTML('beforeend',
+            `<div class="product__change">
+               <div class="product__minus">
+               <i class="fa-solid fa-minus"></i>
+               </div>
+               <input class="product__input" type="text" pattern="[1-9]" value="1" min="1">
+               <div class="product__plus">
+                  <i class="fa-solid fa-plus"></i>
+               </div>
+               <div class="product__total">
+                  n * ${product.price}
+               </div>
+            </div>`);
 
-      productBox.prepend(productImg, productName, productPrice);
-      productBox.insertAdjacentHTML('beforeend',
-         `<div class="product__delete">
-            <i class="fa-solid fa-trash-can"></i>
-            <i class="fa-solid fa-trash-can-xmark"></i>
-         </div>`);
-      productBox.insertAdjacentHTML('beforeend',
-         `<div class="product__change">
-            <div class="product__minus">
-            <i class="fa-solid fa-minus"></i>
-            </div>
-            <input class="product__input" type="text" pattern="[1-9]" value="1" min="1">
-            <div class="product__plus">
-               <i class="fa-solid fa-plus"></i>
-            </div>
-            <div class="product__total">
-               n * ${product.price}
-            </div>
-         </div>`);
+         document.querySelector('.cart__header').after(productBox);
 
-      document.querySelector('.cart__header').after(productBox);
-
-      document.querySelector('.product__input').addEventListener('keydown', deleteExtraSymbol);
-      function deleteExtraSymbol(e) {
-         if (e.key == '+' || e.key == 'ArrowUp') {
-            e.preventDefault();
-            ++e.currentTarget.value;
-            return;
+         document.querySelector('.product__input').addEventListener('keydown', deleteExtraSymbol);
+         function deleteExtraSymbol(e) {
+            if (e.key == '+' || e.key == 'ArrowUp') {
+               e.preventDefault();
+               ++e.currentTarget.value;
+               return;
+            }
+            if (e.key == '-' || e.key == 'ArrowDown') {
+               e.preventDefault();
+               if (e.currentTarget.value > 1) --e.currentTarget.value;
+               return;
+            }
+            if (!(e.key == '0' || e.key == '1' || e.key == '2' || e.key == '3' || e.key == '4' ||
+               e.key == '5' || e.key == '6' || e.key == '7' || e.key == '8' || e.key == '9' ||
+               e.key == 'Backspace' || e.key == 'Delete' || e.key == 'ArrowLeft' || e.key == 'ArrowRight')) {
+               e.preventDefault();
+               return;
+            }
          }
-         if (e.key == '-' || e.key == 'ArrowDown') {
-            e.preventDefault();
-            if (e.currentTarget.value > 1) --e.currentTarget.value;
-            return;
+         document.querySelector('.product__input').addEventListener('keyup', shiftZero);
+         function shiftZero(e) {
+            if (e.key == '0' && (e.currentTarget.value.indexOf('0') == 0)) {
+               e.currentTarget.value = +e.currentTarget.value;
+               e.currentTarget.selectionEnd = 0;
+            }
          }
-         if (!(e.key == '0' || e.key == '1' || e.key == '2' || e.key == '3' || e.key == '4' ||
-            e.key == '5' || e.key == '6' || e.key == '7' || e.key == '8' || e.key == '9' ||
-            e.key == 'Backspace' || e.key == 'Delete' || e.key == 'ArrowLeft' || e.key == 'ArrowRight')) {
-            e.preventDefault();
-            return;
+         document.querySelector('.product__input').addEventListener('keyup', countCheck);
+         function countCheck(e) {
+            if (e.currentTarget.value < 1) e.currentTarget.value = 1;
+         }
+
+         document.querySelector('.product__input').oncut = () => false;
+         document.querySelector('.product__minus').addEventListener('click', function (e) {
+            if (e.currentTarget.nextElementSibling.value > 1)
+               e.currentTarget.nextElementSibling.value--;
+         })
+         document.querySelector('.product__plus').addEventListener('click', function (e) {
+            e.currentTarget.previousElementSibling.value++;
+         })
+         document.querySelector('.product__delete').onclick = function () {
+            Cart.splice(Cart.indexOf(product), 1);
+            productBox.remove();
          }
       }
-      document.querySelector('.product__input').addEventListener('keyup', shiftZero);
-      function shiftZero(e) {
-         if (e.key == '0' && (e.currentTarget.value.indexOf('0') == 0)) {
-            e.currentTarget.value = +e.currentTarget.value;
-            e.currentTarget.selectionEnd = 0;
-         }
-      }
-      document.querySelector('.product__input').addEventListener('keyup', countCheck);
-      function countCheck(e) {
-         if (e.currentTarget.value < 1) e.currentTarget.value = 1;
-      }
 
-      document.querySelector('.product__input').oncut = () => false;
-      document.querySelector('.product__minus').addEventListener('click', function (e) {
-         if (e.currentTarget.nextElementSibling.value > 1)
-            e.currentTarget.nextElementSibling.value--;
-      })
-      document.querySelector('.product__plus').addEventListener('click', function (e) {
-         e.currentTarget.previousElementSibling.value++;
-      })
-      document.querySelector('.product__delete').onclick = function () {
-         Cart.splice(Cart.indexOf(product), 1);
-         productBox.remove();
-      }
-   }
-
-   document.querySelector('.cart__close').onclick = function closeCartOnIcon() {
-      document.querySelector('.cart').classList.add('displayNone');
-   }
-
-   document.querySelector('.header__cart').onclick = function showCart() {
       document.querySelector('.cart').classList.remove('displayNone');
-
       addEventListener('keyup', function closeCartOnEsc(e) {
          if (e.keyCode == 27)
             document.querySelector('.cart').classList.add('displayNone');
       })
    }
 
+   document.querySelector('.cart__close').onclick = function closeCartOnIcon() {
+      document.querySelector('.cart').classList.add('displayNone');
+   }
 }
+

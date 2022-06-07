@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import url("../css/nullStyle.css");
 @import url(../fontawesome-free-6.1.1-web/css/all.css);
@@ -34,6 +35,34 @@ input::-webkit-inner-spin-button {
   /* <-- Apparently some margin are still there even though it's hidden */
 }
 
+html {
+  position: fixed;
+  top: -500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* Работает в Firefox */
+  /* Работает в Chrome, Edge и Safari */
+}
+
+html * {
+  scrollbar-width: 0.75rem;
+  scrollbar-color: #333 rgba(121, 87, 213, 0.45);
+}
+
+html ::-webkit-scrollbar {
+  background-color: #333;
+  width: 0.7rem;
+}
+
+html ::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+html ::-webkit-scrollbar-thumb {
+  background: rgba(121, 87, 213, 0.7);
+  border-radius: 10px;
+}
+
 body {
   display: -ms-grid;
   display: grid;
@@ -45,6 +74,9 @@ body {
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   -ms-grid-column-span: 2;
@@ -107,13 +139,13 @@ body {
   color: #ccc;
 }
 
-.header__cart {
+.header-cart {
   font-size: 1.5rem;
   position: relative;
   font-size: 2rem;
 }
 
-.header__cart .cart-counter {
+.header-cart .cart-counter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -135,23 +167,23 @@ body {
   font-size: 1.1rem;
 }
 
-.header__cart:hover {
+.header-cart:hover {
   opacity: 0.8;
   -webkit-transform: scale(1.02);
           transform: scale(1.02);
   cursor: pointer;
 }
 
-.header__cart:active {
+.header-cart:active {
   opacity: 0.9;
 }
 
-.header__cart:disabled + {
+.header-cart:disabled + {
   opacity: 0.7;
   cursor: not-allowed;
 }
 
-.header__cart:disabled + .cart-counter__wrapper {
+.header-cart:disabled + .cart-counter__wrapper {
   display: none;
 }
 
@@ -205,6 +237,7 @@ body {
 }
 
 .cart__header {
+  overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -215,7 +248,9 @@ body {
       -ms-flex-align: center;
           align-items: center;
   padding: 0 1.2rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 10px 10px -10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 20px;
 }
 
 .cart__header .heading {
@@ -233,7 +268,9 @@ body {
   background-color: white;
   padding: 2.2rem;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 6px 6px -6px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 6px 6px -6px rgba(0, 0, 0, 0.7);
+  margin-bottom: 8px;
 }
 
 .cart .product__delete {
@@ -261,13 +298,13 @@ body {
 
 .cart .product__name {
   position: absolute;
-  top: 140px;
+  top: 50px;
   left: 140px;
 }
 
 .cart .product__price {
   position: absolute;
-  top: 160px;
+  top: 70px;
   left: 140px;
 }
 
@@ -401,7 +438,6 @@ body {
 }
 
 .filter {
-  height: 100vh;
   -ms-grid-row: 2;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
@@ -410,11 +446,37 @@ body {
   -webkit-box-shadow: 0 0 10px grey;
           box-shadow: 0 0 10px grey;
   z-index: 10000;
-  overflow-y: scroll;
+  height: 100%;
+  padding: 1.5rem;
+  position: relative;
+  z-index: 10000;
 }
 
 .filter-container {
-  padding: 1.5rem;
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 1;
+  top: 120px;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.filter-container::-webkit-scrollbar {
+  width: 0.75rem;
+  background: none;
+}
+
+.filter-container::-webkit-scrollbar-track {
+  background-color: #333;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.filter-container::-webkit-scrollbar-thumb {
+  background: rgba(121, 87, 213, 0.7);
+  border-radius: 10px;
+  border: 2px solid #333;
 }
 
 .filter-box {

@@ -33,6 +33,24 @@ input::-webkit-inner-spin-button {
    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
+//    Scrollbar ctyle
+// /* Работает в Firefox */
+// * {
+//    scrollbar-width: thin;
+//    scrollbar-color: blue orange;
+// } /* Работает в Chrome, Edge и Safari */
+// *::-webkit-scrollbar {
+//    width: 12px;
+// }
+// *::-webkit-scrollbar-track {
+//    background: orange;
+// }
+// *::-webkit-scrollbar-thumb {
+//    background-color: blue;
+//    border-radius: 20px;
+//    border: 3px solid orange;
+// }
+
 //variables
 $color_1: #7957d5;
 $headerBackgroundColor: #333;
@@ -58,6 +76,32 @@ $searchBackgroundColor: rgba(
    $color: grey,
    $alpha: 0.1,
 );
+
+html {
+   position: fixed;
+   top: -500px;
+   overflow-y: scroll;
+   overflow-x: hidden;
+   /* Работает в Firefox */
+   * {
+      scrollbar-width: 0.75rem;
+      scrollbar-color: #333 rgba($color_1, 0.45);
+   }
+
+   /* Работает в Chrome, Edge и Safari */
+   ::-webkit-scrollbar {
+      background-color: #333;
+      width: 0.7rem;
+   }
+   ::-webkit-scrollbar-track {
+      border-radius: 10px;
+   }
+   ::-webkit-scrollbar-thumb {
+      background: rgba($color_1, 0.7);
+      border-radius: 10px;
+   }
+}
+
 body {
    display: grid;
    grid-template-columns: 20% 1fr;
@@ -66,6 +110,9 @@ body {
 }
 
 .header {
+   position: fixed;
+   top: 0;
+   width: 100%;
    grid-area: header;
    z-index: 900000;
    height: $headerHeight;
@@ -104,7 +151,7 @@ body {
          color: #ccc;
       }
    }
-   &__cart {
+   &-cart {
       font-size: $cartSize;
       position: relative;
       font-size: 2rem;
@@ -180,11 +227,13 @@ body {
    }
 
    &__header {
+      overflow: hidden;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 1.2rem 2rem;
-      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+      box-shadow: 0px 10px 10px -10px rgba($color: #000000, $alpha: 0.7);
+      margin-bottom: 20px;
 
       .heading {
          font-weight: 500;
@@ -202,7 +251,8 @@ body {
       background-color: white;
       padding: 2.2rem;
       position: relative;
-      border-bottom: 1px solid rgba($color: #000000, $alpha: 0.3);
+      box-shadow: 0px 6px 6px -6px rgba($color: #000000, $alpha: 0.7);
+      margin-bottom: 8px;
 
       &__delete {
          position: absolute;
@@ -228,13 +278,13 @@ body {
 
       &__name {
          position: absolute;
-         top: 140px;
+         top: 50px;
          left: 140px;
       }
 
       &__price {
          position: absolute;
-         top: 160px;
+         top: 70px;
          left: 140px;
       }
 
@@ -339,14 +389,39 @@ body {
 }
 
 .filter {
-   height: 100vh;
    grid-area: filter;
    background-color: $filterBackground;
    box-shadow: 0 0 10px grey;
    z-index: 10000;
-   overflow-y: scroll;
+   height: 100%;
+   padding: 1.5rem;
+   position: relative;
+   z-index: 10000;
+
    &-container {
-      padding: 1.5rem;
+      position: sticky;
+      z-index: 1;
+      top: 120px;
+      height: 70vh;
+      // margin-bottom: 100%;
+      // padding: 1.5rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      &::-webkit-scrollbar {
+         width: 0.75rem;
+         background: none;
+      }
+      &::-webkit-scrollbar-track {
+         background-color: #333;
+         border-radius: 10px;
+         margin-left: 10px;
+      }
+      &::-webkit-scrollbar-thumb {
+         background: rgba($color_1, 0.7);
+         border-radius: 10px;
+         border: 2px solid #333;
+      }
    }
    &-box {
       padding-bottom: 16px;
