@@ -274,7 +274,7 @@ function onCheckboxClick(e) {
 }
 
 
-{ //  closing filter bar
+{ //filter bar
    let filterToggleIcons = document.querySelectorAll(".filter-toggle");
    filterToggleIcons.forEach((icon) => icon.addEventListener("click", switchFilterBox));
 
@@ -287,6 +287,52 @@ function onCheckboxClick(e) {
          if (filterBoxChild.classList.contains("filter-checkbox"))
             filterBoxChild.classList.toggle("displayNone");
       }
+   }
+
+
+
+   //  ------------------
+   let filterContainer = document.querySelector('.filter');
+   if (filterContainer.addEventListener) {
+      if ('onwheel' in document) {
+         // IE9+, FF17+, Ch31+ 
+         filterContainer.addEventListener("wheel", scrollOnPadding);
+      } else if ('onmousewheel' in document) {
+         // устаревший вариант события 
+         filterContainer.addEventListener("mousewheel", scrollOnPadding);
+      } else {
+         // Firefox < 17 
+         filterContainer.addEventListener("MozMousePixelScroll", scrollOnPadding);
+      }
+   } else {
+      // IE8- 
+      filterContainer.attachEvent("onmousewheel", scrollOnPadding);
+   }
+
+   filterContainer.addEventListener('mouseleave', function () {
+
+      if (document.documentElement.style.position != "static") {
+         let scrollHeight = - parseInt(document.documentElement.style.top);
+
+         document.documentElement.style.position = "static";
+         document.documentElement.scrollTo(0, scrollHeight);
+      }
+   })
+
+   filterContainer.addEventListener('mouseover', function () {
+      let scrollHeight = document.documentElement.scrollTop;
+
+      if (document.documentElement.style.position != "fixed") {
+         document.documentElement.style.position = "fixed";
+         document.documentElement.style.top = - scrollHeight + 'px';
+      }
+   })
+
+   function scrollOnPadding(e) {
+      let delta = e.deltaY || e.detail || e.wheelDelta;
+
+      document.querySelector('.filter-container').scrollTo(0,
+         document.querySelector('.filter-container').scrollTop + delta);
    }
 }
 
@@ -343,6 +389,14 @@ function onCheckboxClick(e) {
 }
 
 { //Cart
+   function closeCart() {
+      document.querySelector('.cart').classList.add('displayNone');
+      let scrollHeight = -parseInt(document.documentElement.style.top);
+
+      document.documentElement.style.position = "static";
+      document.documentElement.scrollTo(0, scrollHeight);
+   }
+
    document.querySelector('.header-cart').onclick = function showCart() {
       for (let product of Cart) {
          let productBox = document.createElement('div');
@@ -429,14 +483,23 @@ function onCheckboxClick(e) {
       }
 
       document.querySelector('.cart').classList.remove('displayNone');
+
+      document.documentElement.style.top = '-' + document.documentElement.scrollTop + 'px';
+      document.documentElement.style.position = "fixed";
+
       addEventListener('keyup', function closeCartOnEsc(e) {
          if (e.keyCode == 27)
-            document.querySelector('.cart').classList.add('displayNone');
+            closeCart();
       })
+      document.querySelector('.cart').addEventListener('click', function closeCartOnClickOut(e) {
+         if (e.target.classList.contains('cart')) {
+            closeCart();
+         }
+
+      })
+      document.querySelector('.cart__close').onclick = closeCart;
+
    }
 
-   document.querySelector('.cart__close').onclick = function closeCartOnIcon() {
-      document.querySelector('.cart').classList.add('displayNone');
-   }
 }
 

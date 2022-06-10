@@ -36,8 +36,6 @@ input::-webkit-inner-spin-button {
 }
 
 html {
-  position: fixed;
-  top: -500px;
   overflow-y: scroll;
   overflow-x: hidden;
   /* Работает в Firefox */
