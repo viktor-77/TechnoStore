@@ -101,8 +101,6 @@ function buildProductList() { //calcFilterCountlinkers calls this function
          e.currentTarget.parentElement.parentElement.children[0].classList.toggle('displayNone');
          e.currentTarget.children[0].classList.toggle('displayNone');
          e.currentTarget.children[1].classList.toggle('displayNone');
-
-         console.log(Cart);
       }
       let productBoxClone = document.createElement('div');
       productBoxClone.classList.add('product__box');
@@ -310,7 +308,6 @@ function onCheckboxClick(e) {
    }
 
    filterContainer.addEventListener('mouseleave', function () {
-
       if (document.documentElement.style.position != "static") {
          let scrollHeight = - parseInt(document.documentElement.style.top);
 
@@ -321,7 +318,6 @@ function onCheckboxClick(e) {
 
    filterContainer.addEventListener('mouseover', function () {
       let scrollHeight = document.documentElement.scrollTop;
-
       if (document.documentElement.style.position != "fixed") {
          document.documentElement.style.position = "fixed";
          document.documentElement.style.top = - scrollHeight + 'px';
@@ -398,6 +394,7 @@ function onCheckboxClick(e) {
    }
 
    document.querySelector('.header-cart').onclick = function showCart() {
+      document.querySelectorAll('.cart__product').forEach(el => el.remove());
       for (let product of Cart) {
          let productBox = document.createElement('div');
          productBox.classList.add('cart__product', 'product');
@@ -435,7 +432,7 @@ function onCheckboxClick(e) {
                </div>
             </div>`);
 
-         document.querySelector('.cart__header').after(productBox);
+         document.querySelector('.cart__product-container').prepend(productBox);
 
          document.querySelector('.product__input').addEventListener('keydown', deleteExtraSymbol);
          function deleteExtraSymbol(e) {
@@ -483,7 +480,6 @@ function onCheckboxClick(e) {
       }
 
       document.querySelector('.cart').classList.remove('displayNone');
-
       document.documentElement.style.top = '-' + document.documentElement.scrollTop + 'px';
       document.documentElement.style.position = "fixed";
 

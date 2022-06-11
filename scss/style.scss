@@ -79,7 +79,6 @@ $searchBackgroundColor: rgba(
 
 html {
    // position: fixed;
-   // top: -500px;
    overflow-y: scroll;
    overflow-x: hidden;
    /* Работает в Firefox */
@@ -221,9 +220,26 @@ body {
       padding: 2.5rem;
       border-radius: 8px;
       width: 55%;
-      height: 70%;
-      overflow-y: scroll;
+      height: 100%;
+      // overflow-y: hidden;
       background-color: #fff;
+   }
+
+   &__product-container {
+      // overflow-y: auto;
+      height: 55%;
+      background-color: #fff;
+      overflow-x: hidden;
+      /* Работает в Firefox */
+      & {
+         border-radius: 10px;
+      }
+      /* Работает в Chrome, Edge и Safari */
+      &::-webkit-scrollbar {
+         background-color: #333;
+         width: 0.7rem;
+         border-radius: 10px;
+      }
    }
 
    &__header {
