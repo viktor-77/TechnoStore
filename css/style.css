@@ -127,6 +127,10 @@ body {
   font-size: 1.1rem;
 }
 
+.header .header-menu__item {
+  position: relative;
+}
+
 .header .language select,
 .header .language option,
 .header .currency select,
@@ -176,13 +180,32 @@ body {
   opacity: 0.9;
 }
 
-.header-cart:disabled + {
-  opacity: 0.7;
+.header-cart_disabled {
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
-.header-cart:disabled + .cart-counter__wrapper {
-  display: none;
+.header-cart_disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.7;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.header-cart__empty {
+  position: absolute;
+  left: 30px;
+  top: -25px;
+  background-color: white;
+  border-radius: 8px;
+  border: 3px solid #7957d5;
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+          box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #333;
+  padding: 5px;
+  z-index: 9999999;
 }
 
 .header .login {
@@ -226,17 +249,25 @@ body {
 }
 
 .cart__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
   padding: 2.5rem;
   border-radius: 8px;
   width: 55%;
-  height: 100%;
+  overflow: hidden;
   background-color: #fff;
 }
 
 .cart__product-container {
-  height: 55%;
   background-color: #fff;
-  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
   /* Работает в Firefox */
   /* Работает в Chrome, Edge и Safari */
 }
@@ -252,6 +283,7 @@ body {
 }
 
 .cart__header {
+  background-color: #fff;
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -394,12 +426,11 @@ body {
 }
 
 .cart__total {
-  margin-top: 30px;
+  margin-top: 1rem;
   padding: 10px;
   width: 220px;
   margin-left: auto;
   position: relative;
-  right: 30px;
   border: 2px solid #7a7a7a;
   border-radius: 8px;
   -webkit-box-shadow: 0 0 1px #8f5db7;

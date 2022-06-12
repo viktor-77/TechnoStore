@@ -117,28 +117,36 @@ body {
    height: $headerHeight;
    background-color: $headerBackgroundColor;
    color: $headerFontColor;
+
    &__container {
       height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
    }
+
    &-logo {
       display: flex;
       align-items: center;
       gap: $headerLogoGap;
    }
+
    &-logo__icon {
       font-size: $headerLogoIconSize;
    }
+
    &-logo__heading {
       font-size: $headerLogoHeading;
    }
+
    &-menu {
       display: flex;
       align-items: center;
       gap: $headerMenuGap;
       font-size: $headerMenuTextSize;
+   }
+   .header-menu__item {
+      position: relative;
    }
    .language,
    .currency {
@@ -150,10 +158,12 @@ body {
          color: #ccc;
       }
    }
+
    &-cart {
       font-size: $cartSize;
       position: relative;
       font-size: 2rem;
+
       .cart-counter {
          display: flex;
          justify-content: center;
@@ -169,22 +179,44 @@ body {
          font-weight: 500;
          font-size: 1.1rem;
       }
+
       &:hover {
          opacity: 0.8;
          transform: scale(1.02);
+
          cursor: pointer;
       }
       &:active {
          opacity: 0.9;
       }
-      &:disabled + {
-         opacity: 0.7;
+
+      &_disabled {
          cursor: not-allowed;
+         opacity: 0.7;
+
+         &:hover {
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: none;
+         }
       }
-      &:disabled + .cart-counter__wrapper {
-         display: none;
+
+      &__empty {
+         position: absolute;
+         left: 30px;
+         top: -25px;
+         background-color: white;
+         border-radius: 8px;
+         border: 3px solid $color_1;
+         box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.4);
+         font-size: 0.8rem;
+         font-weight: 600;
+         color: #333;
+         padding: 5px;
+         z-index: 9999999;
       }
    }
+
    .login {
       border: $loginBorder;
       border-radius: $loginBorderRadius;
@@ -217,19 +249,21 @@ body {
    align-items: center;
 
    &__container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
       padding: 2.5rem;
       border-radius: 8px;
       width: 55%;
-      height: 100%;
-      // overflow-y: hidden;
+      overflow: hidden;
       background-color: #fff;
    }
 
    &__product-container {
-      // overflow-y: auto;
-      height: 55%;
       background-color: #fff;
-      overflow-x: hidden;
+      overflow-y: auto;
+      height: 100%;
+
       /* Работает в Firefox */
       & {
          border-radius: 10px;
@@ -243,6 +277,7 @@ body {
    }
 
    &__header {
+      background-color: #fff;
       overflow: hidden;
       display: flex;
       justify-content: space-between;
@@ -356,12 +391,11 @@ body {
    }
 
    &__total {
-      margin-top: 30px;
+      margin-top: 1rem;
       padding: 10px;
       width: 220px;
       margin-left: auto;
       position: relative;
-      right: 30px;
       border: 2px solid #7a7a7a;
       border-radius: 8px;
       box-shadow: 0 0 1px #8f5db7;
