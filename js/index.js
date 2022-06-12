@@ -45,8 +45,6 @@ function changeCartCounter() {
       }
 
       if (document.querySelector('.header-cart').classList.contains('header-cart_disabled')) {
-         console.log(1);
-
          document.querySelector('.header-cart').classList.remove('header-cart_disabled')
       }
 
@@ -65,6 +63,8 @@ function changeCartCounter() {
    }
 }
 function buildProductList() {
+   document.querySelectorAll('.product__box').forEach(el => el.remove());
+
    for (let product of SelectedProducts) {
       let productBox = document.createElement('div');
       productBox.classList.add('product__box');
