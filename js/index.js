@@ -61,6 +61,12 @@ function changeCartCounter() {
 
       document.querySelector('.cart').classList.add('displayNone');
    }
+
+   if (Cart.length == 1) {
+      document.querySelector('.cart__container').style.height = '470px';
+   } else {
+      document.querySelector('.cart__container').style.height = '100%';
+   }
 }
 function buildProductList() {
    document.querySelectorAll('.product__box').forEach(el => el.remove());
@@ -479,7 +485,6 @@ function onCheckboxClick(e) {
                </div>`);
 
             document.querySelector('.cart__product-container').prepend(productBox);
-
 
             document.querySelector('.product__input').addEventListener('keydown', onCartInput);
             function onCartInput(e) {
