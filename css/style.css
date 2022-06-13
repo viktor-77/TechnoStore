@@ -212,7 +212,7 @@ body {
 
 .header-cart.disabled {
   opacity: 0.7 !important;
-  background: -webkit-linear-gradient(#eee, #333);
+  background: -webkit-linear-gradient(#eee, #444);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
