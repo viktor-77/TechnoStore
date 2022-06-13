@@ -572,8 +572,6 @@ body {
 
 .filter-toggle i:hover {
   opacity: 0.6;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
   cursor: pointer;
 }
 
