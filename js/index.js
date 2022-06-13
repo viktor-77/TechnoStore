@@ -44,13 +44,13 @@ function changeCartCounter() {
          document.querySelector('.cart-counter').classList.remove('displayNone');
       }
 
-      if (document.querySelector('.header-cart').classList.contains('header-cart_disabled')) {
-         document.querySelector('.header-cart').classList.remove('header-cart_disabled')
+      if (document.querySelector('.header-cart').classList.contains('disabled')) {
+         document.querySelector('.header-cart').classList.remove('disabled')
       }
 
    } else {
-      if (!document.querySelector('.header-cart').classList.contains('header-cart_disabled')) {
-         document.querySelector('.header-cart').classList.add('header-cart_disabled')
+      if (!document.querySelector('.header-cart').classList.contains('disabled')) {
+         document.querySelector('.header-cart').classList.add('disabled')
       }
 
       if (!document.querySelector('.cart-counter').classList.contains('displayNone')) {
@@ -463,9 +463,10 @@ function onCheckboxClick(e) {
                   <i class="fa-solid fa-trash-can"></i>
                   <i class="fa-solid fa-trash-can-xmark"></i>
                </div>`);
+
             productBox.insertAdjacentHTML('beforeend',
                `<div class="product__change">
-                  <div class="product__minus">
+                  <div class="product__minus disabled">
                   <i class="fa-solid fa-minus"></i>
                   </div>
                   <input class="product__input" type="text" pattern="[1-9]" value="1" min="1">
@@ -479,24 +480,38 @@ function onCheckboxClick(e) {
 
             document.querySelector('.cart__product-container').prepend(productBox);
 
-            document.querySelector('.product__input').addEventListener('keydown', deleteExtraSymbol);
-            function deleteExtraSymbol(e) {
+
+            document.querySelector('.product__input').addEventListener('keydown', onCartInput);
+            function onCartInput(e) {
                if (e.key == '+' || e.key == 'ArrowUp') {
                   e.preventDefault();
                   ++e.currentTarget.value;
+
+                  if (e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                     e.currentTarget.parentElement.querySelector('.product__minus').classList.remove('disabled');
+                  }
                   return;
                }
                if (e.key == '-' || e.key == 'ArrowDown') {
                   e.preventDefault();
                   if (e.currentTarget.value > 1) --e.currentTarget.value;
+
+                  if ((e.currentTarget.value == 1) &&
+                     !e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                     e.currentTarget.parentElement.querySelector('.product__minus').classList.add('disabled');
+                  }
                   return;
                }
-               if (!(e.key == '0' || e.key == '1' || e.key == '2' || e.key == '3' || e.key == '4' ||
-                  e.key == '5' || e.key == '6' || e.key == '7' || e.key == '8' || e.key == '9' ||
-                  e.key == 'Backspace' || e.key == 'Delete' || e.key == 'ArrowLeft' || e.key == 'ArrowRight')) {
-                  e.preventDefault();
-                  return;
+
+               function deleteExtraSymbol() {
+                  if (!(e.key == '0' || e.key == '1' || e.key == '2' || e.key == '3' || e.key == '4' ||
+                     e.key == '5' || e.key == '6' || e.key == '7' || e.key == '8' || e.key == '9' ||
+                     e.key == 'Backspace' || e.key == 'Delete' || e.key == 'ArrowLeft' || e.key == 'ArrowRight')) {
+                     e.preventDefault();
+                     return;
+                  }
                }
+               deleteExtraSymbol();
             }
             document.querySelector('.product__input').addEventListener('keyup', shiftZero);
             function shiftZero(e) {
@@ -505,18 +520,35 @@ function onCheckboxClick(e) {
                   e.currentTarget.selectionEnd = 0;
                }
             }
-            document.querySelector('.product__input').addEventListener('keyup', countCheck);
-            function countCheck(e) {
+            document.querySelector('.product__input').addEventListener('keyup', checkInput);
+            function checkInput(e) {
                if (e.currentTarget.value < 1) e.currentTarget.value = 1;
+
+               if ((e.currentTarget.parentElement.querySelector('.product__input').value == 1) &&
+                  !e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                  e.currentTarget.parentElement.querySelector('.product__minus').classList.add('disabled');
+               } else if ((e.currentTarget.parentElement.querySelector('.product__input').value > 1)
+                  && e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                  e.currentTarget.parentElement.querySelector('.product__minus').classList.remove('disabled');
+               }
             }
 
             document.querySelector('.product__input').oncut = () => false;
             document.querySelector('.product__minus').addEventListener('click', function (e) {
                if (e.currentTarget.nextElementSibling.value > 1)
                   e.currentTarget.nextElementSibling.value--;
+
+               if ((e.currentTarget.parentElement.querySelector('.product__input').value == 1) &&
+                  !e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                  e.currentTarget.parentElement.querySelector('.product__minus').classList.add('disabled');
+               }
             })
             document.querySelector('.product__plus').addEventListener('click', function (e) {
                e.currentTarget.previousElementSibling.value++;
+
+               if (e.currentTarget.parentElement.querySelector('.product__minus').classList.contains('disabled')) {
+                  e.currentTarget.parentElement.querySelector('.product__minus').classList.remove('disabled');
+               }
             })
             document.querySelector('.product__delete').onclick = function deleteProductFromCart() {
                Cart.splice(Cart.indexOf(product), 1);
