@@ -137,6 +137,14 @@ function buildProductList() {
          productBox.classList.toggle('product__box_active');
          changeCartCounter();
       }
+
+      if (Cart.includes(product)) {
+         productBox.querySelector('.add-cart').classList.toggle('displayNone');
+         productBox.querySelector('.cart-active').classList.toggle('displayNone');
+         productBox.querySelector('.remove-cart').classList.toggle('displayNone');
+         productBox.classList.toggle('product__box_active');
+
+      }
    }
 }
 buildProductList();
@@ -514,10 +522,18 @@ function onCheckboxClick(e) {
                Cart.splice(Cart.indexOf(product), 1);
                productBox.remove();
 
-               document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.add-cart').classList.toggle('displayNone');
-               document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.cart-active').classList.toggle('displayNone');
-               document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.remove-cart').classList.toggle('displayNone');
-               document.querySelector(`.product__box[data-product-id="${product.id}"]`).classList.toggle('product__box_active');
+               if (document.querySelector(`.product__box[data-product-id="${product.id}"]`)) {
+                  document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.add-cart').classList.toggle('displayNone');
+               }
+               if (document.querySelector(`.product__box[data-product-id="${product.id}"]`)) {
+                  document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.cart-active').classList.toggle('displayNone');
+               }
+               if (document.querySelector(`.product__box[data-product-id="${product.id}"]`)) {
+                  document.querySelector(`.product__box[data-product-id="${product.id}"]`).querySelector('.remove-cart').classList.toggle('displayNone');
+               }
+               if (document.querySelector(`.product__box[data-product-id="${product.id}"]`)) {
+                  document.querySelector(`.product__box[data-product-id="${product.id}"]`).classList.toggle('product__box_active');
+               }
 
                changeCartCounter();
             }
