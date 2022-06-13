@@ -159,7 +159,7 @@ body {
 .header-cart {
   font-size: 1.5rem;
   position: relative;
-  font-size: 2rem;
+  font-size: 1.9rem;
 }
 
 .header-cart .cart-counter {
@@ -185,14 +185,12 @@ body {
 }
 
 .header-cart:hover {
-  opacity: 0.8;
-  -webkit-transform: scale(1.02);
-          transform: scale(1.02);
+  opacity: 0.9;
   cursor: pointer;
 }
 
 .header-cart:active {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .header-cart__empty {
@@ -214,27 +212,25 @@ body {
 
 .header-cart.disabled {
   opacity: 0.7 !important;
+  background: -webkit-linear-gradient(#eee, #333);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header .login {
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  padding: 0.5rem 0.7rem;
+  font-size: 1.9rem;
+  background: -webkit-linear-gradient(#8a57f6, #6857c4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.header .login span:first-child,
-.header .login span:last-child {
-  padding: 5px;
-}
-
-.header .login span:hover:first-child,
-.header .login span:hover:last-child {
-  opacity: 0.7;
+.header .login:hover {
+  opacity: 0.9;
   cursor: pointer;
 }
 
-.header .login span:active {
-  opacity: 1;
+.header .login:active {
+  opacity: 0.95;
 }
 
 .cart {
