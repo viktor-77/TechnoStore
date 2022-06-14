@@ -145,10 +145,12 @@ body {
           align-items: center;
   gap: 1.8rem;
   font-size: 1.1rem;
+  font-size: 1.9rem;
 }
 
 .header .header-menu__item {
   position: relative;
+  cursor: pointer;
 }
 
 .header .language select,
@@ -162,9 +164,7 @@ body {
 }
 
 .header-cart {
-  font-size: 1.5rem;
   position: relative;
-  font-size: 1.9rem;
 }
 
 .header-cart .cart-counter {
@@ -189,15 +189,6 @@ body {
   font-size: 1.1rem;
 }
 
-.header-cart:hover {
-  opacity: 0.9;
-  cursor: pointer;
-}
-
-.header-cart:active {
-  opacity: 0.95;
-}
-
 .header-cart__empty {
   position: absolute;
   left: 34px;
@@ -212,26 +203,49 @@ body {
   color: #333;
   text-align: center;
   padding: 5px;
-  z-index: 9999999;
+  z-index: 9999999999999;
 }
 
 .header-cart.disabled {
-  opacity: 0.7 !important;
-  background: -webkit-linear-gradient(#eee, #444);
+  background: -webkit-linear-gradient(#ccc, #444);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+.header .selected {
+  background: -webkit-linear-gradient(#7957d5, purple);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header .selected:hover {
+  opacity: 0.85;
+}
+
+.header .selected:active {
+  opacity: 0.95;
+}
+
+.header .libra {
+  color: #ff3300;
+}
+
+.header .libra:hover {
+  opacity: 0.85;
+}
+
+.header .libra:active {
+  opacity: 0.95;
+}
+
 .header .login {
-  font-size: 1.9rem;
   background: -webkit-linear-gradient(#8a57f6, #6857c4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .header .login:hover {
-  opacity: 0.9;
-  cursor: pointer;
+  opacity: 0.85;
 }
 
 .header .login:active {
@@ -935,20 +949,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
-.footer__icon-links > i {
+.footer__icon-links i {
   padding: 5px;
-}
-
-.footer__icon-links > i:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
-}
-
-.footer__icon-links > i:active {
-  opacity: 0.6;
 }
 
 .footer__icon-links .fa-telegram {
@@ -969,4 +974,16 @@ body {
 
 .footer__icon-links .fa-viber {
   color: #8f5db7;
+}
+
+.footer i {
+  cursor: pointer;
+}
+
+.footer i:hover {
+  opacity: 0.8;
+}
+
+.footer i:active {
+  opacity: 0.9;
 }

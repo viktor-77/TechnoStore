@@ -436,11 +436,18 @@ function onCheckboxClick(e) {
       if (!Cart.length && document.querySelector('.header-cart__empty').classList.contains('displayNone')) {
          document.querySelector('.header-cart__empty').classList.remove('displayNone');
       }
+
+      if (Cart.length) {
+         document.querySelector('.header-cart__icon').style.opacity = 0.8;
+      }
    })
+
    document.querySelector('.header-cart').addEventListener('mouseleave', function () {
       if (!document.querySelector('.header-cart__empty').classList.contains('displayNone')) {
          document.querySelector('.header-cart__empty').classList.add('displayNone');
       }
+
+      document.querySelector('.header-cart__icon').style.opacity = 1;
    })
 
    document.querySelector('.header-cart').onclick = function showCart() {
