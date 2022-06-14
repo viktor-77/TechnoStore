@@ -537,11 +537,12 @@ body {
   position: -webkit-sticky;
   position: sticky;
   z-index: 1;
-  top: calc(90px + 1.5rem);
-  height: 70vh;
-  margin: 1.5rem;
+  top: calc(90px + 0.9rem);
+  margin: 0.9rem 1.5rem;
+  height: calc(100vh - 90px - 0.9rem * 2);
   overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 0.7rem;
 }
 
 .filter-container::-webkit-scrollbar {

@@ -368,6 +368,9 @@ function onCheckboxClick(e) {
 
       document.querySelector('.filter-container').scrollTo(0,
          document.querySelector('.filter-container').scrollTop + delta);
+
+      console.log(e.scrollTop);
+
    }
 }
 
