@@ -536,8 +536,8 @@ body {
 .filter-container {
   position: -webkit-sticky;
   position: sticky;
-  z-index: 1;
   top: calc(90px + 0.9rem);
+  z-index: 1;
   margin: 0.9rem 1.5rem;
   height: calc(100vh - 90px - 0.9rem * 2);
   overflow-y: auto;
@@ -922,6 +922,7 @@ body {
 }
 
 .footer {
+  height: 60px;
   z-index: 9999999999999999999;
   -ms-grid-row: 4;
   -ms-grid-column: 1;

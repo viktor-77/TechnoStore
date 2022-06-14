@@ -368,9 +368,6 @@ function onCheckboxClick(e) {
 
       document.querySelector('.filter-container').scrollTo(0,
          document.querySelector('.filter-container').scrollTop + delta);
-
-      console.log(e.scrollTop);
-
    }
 }
 
@@ -604,3 +601,42 @@ function onCheckboxClick(e) {
       }
    }
 }
+
+let bodyScroll = document.documentElement;
+if (bodyScroll.addEventListener) {
+   if ('onwheel' in document) {
+      // IE9+, FF17+, Ch31+ 
+      bodyScroll.addEventListener("wheel", onBodyScroll);
+   } else if ('onmousewheel' in document) {
+      // устаревший вариант события 
+      bodyScroll.addEventListener("mousewheel", onBodyScroll);
+   } else {
+      // Firefox < 17 
+      bodyScroll.addEventListener("MozMousePixelScroll", onBodyScroll);
+   }
+} else {
+   // IE8- 
+   bodyScroll.attachEvent("onmousewheel", onBodyScroll);
+}
+
+let bodyScrollHeight = 0;
+function onBodyScroll(e) {
+   let delta = e.deltaY || e.detail || e.wheelDelta;
+   bodyScrollHeight += delta;
+
+   if (bodyScrollHeight > 952) bodyScrollHeight = 952;
+   if (bodyScrollHeight < 0) bodyScrollHeight = 0;
+
+
+   console.log(bodyScrollHeight);
+
+   if ((bodyScrollHeight >= 750) && delta > 0) {
+      document.querySelector('.footer').scrollIntoView();
+      document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2 - 60px)`;
+   } else {
+      document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2)`;
+      // document.documentElement.scrollTo(bodyScrollHeight + 'px');
+   }
+}
+
+
