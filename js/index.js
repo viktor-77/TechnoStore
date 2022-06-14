@@ -117,8 +117,8 @@ function buildProductList() {
                   <i class="fa-solid fa-minus"></i>
                </div>
             </div>
-            <div class="product__icon favorit">
-               <i class="fa-solid fa-heart"></i>
+            <div class="product__icon">
+               <i class="selected fa-solid fa-heart"></i>
             </div>
             <div class="product__icon product-compare">
                <i class="product-copmpare fa-solid fa-scale-balanced"></i>
@@ -601,4 +601,3 @@ function onCheckboxClick(e) {
       }
    }
 }
-

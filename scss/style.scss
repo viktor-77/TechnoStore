@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
 @import url("../css/nullStyle.css");
+
 @import url(../fontawesome-free-6.1.1-web/css/all.css);
+
 * {
    font-family: "Montserrat", sans-serif;
    letter-spacing: 1.2px;
@@ -68,7 +71,7 @@ input::-webkit-inner-spin-button {
 $color_1: #7957d5;
 $headerBackgroundColor: #333;
 $headerFontColor: white;
-$headerHeight: 110px;
+$headerHeight: 90px;
 $headerLogoGap: 1rem;
 $headerLogoHeading: 2rem;
 $headerLogoIconSize: 1.7rem;
@@ -79,11 +82,13 @@ $cartSize: 1.5rem;
 $loginBorder: 2px solid #ccc;
 $loginBorderRadius: 20px;
 $loginPadding: 0.5rem 0.7rem;
+
 /// filter
 $filterNameSize: 1.2rem;
 $filterBackground: #f2f2f2;
 $filterCheckboxtitleSize: 1rem;
 $filterCheckboxSize: 1.3rem;
+
 ///search
 $searchBackgroundColor: rgba(
    $color: grey,
@@ -115,6 +120,7 @@ html {
 }
 
 body {
+   background-color: $searchBackgroundColor;
    display: grid;
    grid-template-columns: 20% 1fr;
    grid-template-rows: $headerHeight 150px 1fr 60px;
@@ -168,17 +174,20 @@ body {
    .header-menu__item {
       position: relative;
       cursor: pointer;
+
+      &:hover {
+         // background-color: rgba($color: white, $alpha: 0.2);
+         // border-radius: 6px;
+      }
    }
 
-   .language, // header select & option
-   .currency {
-      select,
-      option {
-         background-color: $headerSelectBackground;
-         padding: 8px 20px 8px 8px;
-         border-radius: 5px;
-         color: #ccc;
-      }
+   select, // header select & option
+   option {
+      cursor: pointer;
+      background-color: $headerSelectBackground;
+      padding: 8px 20px 8px 8px;
+      border-radius: 5px;
+      color: #ccc;
    }
 
    &-cart {
@@ -237,7 +246,10 @@ body {
    }
 
    .libra {
-      color: #ff3300;
+      background: -webkit-linear-gradient(#ff3300 0%, gold 200%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      // color: #ff3300;
 
       &:hover {
          opacity: 0.85;
@@ -479,17 +491,16 @@ body {
    box-shadow: 0 0 10px grey;
    z-index: 10000;
    height: 100%;
-   padding: 1.5rem;
    position: relative;
    z-index: 10000;
 
    &-container {
       position: sticky;
       z-index: 1;
-      top: 120px;
+      top: calc(90px + 1.5rem);
       height: 70vh;
-      // margin-bottom: 100%;
-      // padding: 1.5rem;
+
+      margin: 1.5rem;
       overflow-y: auto;
       overflow-x: hidden;
 
@@ -508,6 +519,7 @@ body {
          border: 2px solid #333;
       }
    }
+
    &-box {
       padding-bottom: 16px;
       border-bottom: 1px solid #ddd;
@@ -517,16 +529,19 @@ body {
          border-bottom: none;
       }
    }
+
    &-heading {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.1rem;
    }
+
    &-name {
       font-size: $filterNameSize;
       font-weight: 500;
    }
+
    &-toggle {
       font-size: $filterNameSize;
       i {
@@ -540,6 +555,7 @@ body {
          opacity: 0.6;
       }
    }
+
    &-checkbox {
       margin-left: 0.5rem;
       margin-bottom: 10px;
@@ -555,6 +571,7 @@ body {
          margin-bottom: 0;
       }
    }
+
    .filter-checkbox__input {
       appearance: none;
       position: absolute;
@@ -617,11 +634,12 @@ body {
 
 .search {
    grid-area: search;
-   background-color: $searchBackgroundColor;
+   background-color: inherit;
    position: relative;
    display: flex;
    align-items: center;
    justify-content: center;
+
    .search__container {
       width: 320px;
       box-shadow: 2px 2px 4px grey;
@@ -631,6 +649,7 @@ body {
          box-shadow: 0 0 10px $color_1;
       }
    }
+
    input {
       width: 100%;
       height: 100%;
@@ -643,6 +662,7 @@ body {
          background-color: rgba($color: #fff, $alpha: 0.5);
       }
    }
+
    .search-erase {
       position: absolute;
       top: 6.6px;
@@ -651,10 +671,15 @@ body {
       padding: 6px;
       font-size: 1.12rem;
       cursor: pointer;
+      margin-right: 4px;
+
       &:hover {
-         transform: scale(1.13);
-         opacity: 0.7;
+         padding: 4px 6px;
+         text-align: center;
+         background-color: rgba($color_1, $alpha: 0.3);
+         border-radius: 50%;
       }
+
       &:active {
          opacity: 0.9;
       }
@@ -663,14 +688,16 @@ body {
 
 .product {
    grid-area: products;
-   background-color: rgba($color: grey, $alpha: 0.1);
+   background-color: inherit;
+
    &__container {
-      padding: 40px;
+      padding: 0 40px 40px;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr;
       gap: 20px;
       justify-content: center;
    }
+
    &__box {
       position: relative;
       width: 100%;
@@ -693,6 +720,7 @@ body {
          box-shadow: 2px 2px 10px rgba($color: grey, $alpha: 0.6);
       }
    }
+
    .cart-active {
       color: rgba($color: black, $alpha: 0.8);
       font-size: 2rem;
@@ -716,12 +744,15 @@ body {
          max-width: 100%;
       }
    }
+
    &__name {
       font-size: 1.15rem;
    }
+
    &__price {
       color: #333;
    }
+
    &__actions {
       border-top: 1px solid rgba($color: grey, $alpha: 0.3);
       padding: 8px 8px 0;
@@ -730,6 +761,7 @@ body {
       width: 100%;
       font-size: 1.7rem;
    }
+
    &__icon {
       position: relative;
       border-radius: 8px;
@@ -740,15 +772,17 @@ body {
       color: rgba($color: black, $alpha: 0.8);
       cursor: pointer;
       &:hover {
-         background-color: rgba($color: grey, $alpha: 0.2);
+         background-color: rgba($color: grey, $alpha: 0.3);
          box-shadow: 1px 1px 4px rgba($color: grey, $alpha: 0.5);
       }
       &:active {
          background-color: rgba($color: grey, $alpha: 0.1);
          box-shadow: 1px 1px 4px rgba($color: grey, $alpha: 0.4);
       }
-      &.favorit {
-         color: $color_1;
+      .selected {
+         background: -webkit-linear-gradient($color_1, purple);
+         -webkit-background-clip: text;
+         -webkit-text-fill-color: transparent;
       }
       &.product-compare {
          color: #ff3300;
