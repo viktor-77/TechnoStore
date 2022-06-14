@@ -63,7 +63,7 @@ function changeCartCounter() {
    }
 
    if (Cart.length == 1) {
-      document.querySelector('.cart__container').style.height = '470px';
+      document.querySelector('.cart__container').style.height = '490px';
    } else {
       document.querySelector('.cart__container').style.height = '100%';
    }

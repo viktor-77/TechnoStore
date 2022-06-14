@@ -121,6 +121,11 @@ body {
       -ms-flex-align: center;
           align-items: center;
   gap: 1rem;
+  cursor: pointer;
+}
+
+.header-logo:active {
+  opacity: 0.8;
 }
 
 .header-logo__icon {
@@ -287,6 +292,7 @@ body {
 }
 
 .cart__header {
+  min-height: 50px;
   background-color: #fff;
   overflow: hidden;
   display: -webkit-box;
@@ -310,6 +316,8 @@ body {
 }
 
 .cart__header .cart__close {
+  position: relative;
+  top: 3px;
   font-size: 1.6rem;
   color: grey;
   cursor: pointer;
@@ -335,7 +343,11 @@ body {
 }
 
 .cart .product__delete:hover {
-  opacity: 0.8;
+  opacity: 0.9;
+}
+
+.cart .product__delete:active {
+  opacity: 0.95;
 }
 
 .cart .product__img {
