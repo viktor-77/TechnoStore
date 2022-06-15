@@ -623,8 +623,8 @@ if (bodyScroll.addEventListener) {
 
 let bodyScrollHeight = document.documentElement.scrollTop;
 let footerHeight = document.querySelector('.footer').offsetHeight;
-
-let maxBodyScrollHeight;
+let headerHeight = document.querySelector('.header').offsetHeight;
+let maxBodyScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
 
 function onBodyScroll(e) {
@@ -632,26 +632,27 @@ function onBodyScroll(e) {
       let delta = e.deltaY || e.detail || e.wheelDelta;
       bodyScrollHeight += delta;
 
-      if (bodyScrollHeight > 952) bodyScrollHeight = 952;
+      if (bodyScrollHeight > maxBodyScrollHeight) bodyScrollHeight = maxBodyScrollHeight;
       if (bodyScrollHeight < 0) bodyScrollHeight = 0;
 
-      if (((bodyScrollHeight >= 850)) && (delta > 0)) {
-         document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2 - 60px)`;
-         document.documentElement.scrollTo(0, 952);
-         bodyScrollHeight = 952;
+      if (((bodyScrollHeight >= maxBodyScrollHeight - footerHeight)) && (delta > 0)) {
+         document.querySelector('.filter-container').style.height =
+            `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2 - ${footerHeight + 'px'})`;
+
+         document.documentElement.scrollTo(0, maxBodyScrollHeight);
+         bodyScrollHeight = maxBodyScrollHeight;
       } else {
-         document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2)`;
-         // if (bodyScrollHeight = 952) {
-         // document.documentElement.scrollTo(0, document.documentElement.scrollTop - 100);
-         // bodyScrollHeight = 892;
-         // }
+         document.querySelector('.filter-container').style.height = `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2)`;
+
+         if (bodyScrollHeight == (maxBodyScrollHeight + delta)) {
+            document.documentElement.scrollTo(0, maxBodyScrollHeight - footerHeight);
+            bodyScrollHeight = maxBodyScrollHeight - footerHeight;
+         }
+
+
       }
 
       console.log(bodyScrollHeight);
    }
 }
-
-// if (document.documentElement.scrollTop >= 750) {
-//    document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2 - 60px)`
-// }
 
