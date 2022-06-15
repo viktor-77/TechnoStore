@@ -673,6 +673,7 @@ body {
       margin-right: 4px;
 
       &:hover {
+         top: 8px;
          padding: 4px 6px;
          text-align: center;
          background-color: rgba($color_1, $alpha: 0.3);

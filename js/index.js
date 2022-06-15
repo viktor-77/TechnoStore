@@ -602,6 +602,8 @@ function onCheckboxClick(e) {
    }
 }
 
+
+
 let bodyScroll = document.documentElement;
 if (bodyScroll.addEventListener) {
    if ('onwheel' in document) {
@@ -622,20 +624,19 @@ if (bodyScroll.addEventListener) {
 let bodyScrollHeight = 0;
 function onBodyScroll(e) {
    let delta = e.deltaY || e.detail || e.wheelDelta;
-   bodyScrollHeight += delta;
+
+   if (!e.target.closest('.filter')) {
+      bodyScrollHeight += delta;
+   }
 
    if (bodyScrollHeight > 952) bodyScrollHeight = 952;
    if (bodyScrollHeight < 0) bodyScrollHeight = 0;
 
-
-   console.log(bodyScrollHeight);
-
    if ((bodyScrollHeight >= 750) && delta > 0) {
       document.querySelector('.footer').scrollIntoView();
       document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2 - 60px)`;
-   } else {
+   } else if (!e.target.closest('.filter')) {
       document.querySelector('.filter-container').style.height = `calc(100vh - 90px - 0.9rem * 2)`;
-      // document.documentElement.scrollTo(bodyScrollHeight + 'px');
    }
 }
 

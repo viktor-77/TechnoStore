@@ -758,6 +758,7 @@ body {
 }
 
 .search .search-erase:hover {
+  top: 8px;
   padding: 4px 6px;
   text-align: center;
   background-color: rgba(121, 87, 213, 0.3);
