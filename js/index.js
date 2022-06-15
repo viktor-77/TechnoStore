@@ -603,56 +603,54 @@ function onCheckboxClick(e) {
 }
 
 
-
-let bodyScroll = document.documentElement;
-if (bodyScroll.addEventListener) {
-   if ('onwheel' in document) {
-      // IE9+, FF17+, Ch31+ 
-      bodyScroll.addEventListener("wheel", onBodyScroll);
-   } else if ('onmousewheel' in document) {
-      // устаревший вариант события 
-      bodyScroll.addEventListener("mousewheel", onBodyScroll);
-   } else {
-      // Firefox < 17 
-      bodyScroll.addEventListener("MozMousePixelScroll", onBodyScroll);
-   }
-} else {
-   // IE8- 
-   bodyScroll.attachEvent("onmousewheel", onBodyScroll);
-}
-
-let bodyScrollHeight = document.documentElement.scrollTop;
-let footerHeight = document.querySelector('.footer').offsetHeight;
-let headerHeight = document.querySelector('.header').offsetHeight;
-let maxBodyScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-
-function onBodyScroll(e) {
-   if (!e.target.closest('.filter')) {
-      let delta = e.deltaY || e.detail || e.wheelDelta;
-      bodyScrollHeight += delta;
-
-      if (bodyScrollHeight > maxBodyScrollHeight) bodyScrollHeight = maxBodyScrollHeight;
-      if (bodyScrollHeight < 0) bodyScrollHeight = 0;
-
-      if (((bodyScrollHeight >= maxBodyScrollHeight - footerHeight)) && (delta > 0)) {
-         document.querySelector('.filter-container').style.height =
-            `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2 - ${footerHeight + 'px'})`;
-
-         document.documentElement.scrollTo(0, maxBodyScrollHeight);
-         bodyScrollHeight = maxBodyScrollHeight;
+{ //filter scroll
+   let bodyScroll = document.documentElement;
+   if (bodyScroll.addEventListener) {
+      if ('onwheel' in document) {
+         // IE9+, FF17+, Ch31+ 
+         bodyScroll.addEventListener("wheel", onBodyScroll);
+      } else if ('onmousewheel' in document) {
+         // устаревший вариант события 
+         bodyScroll.addEventListener("mousewheel", onBodyScroll);
       } else {
-         document.querySelector('.filter-container').style.height = `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2)`;
-
-         if (bodyScrollHeight == (maxBodyScrollHeight + delta)) {
-            document.documentElement.scrollTo(0, maxBodyScrollHeight - footerHeight);
-            bodyScrollHeight = maxBodyScrollHeight - footerHeight;
-         }
-
-
+         // Firefox < 17 
+         bodyScroll.addEventListener("MozMousePixelScroll", onBodyScroll);
       }
+   } else {
+      // IE8- 
+      bodyScroll.attachEvent("onmousewheel", onBodyScroll);
+   }
 
-      console.log(bodyScrollHeight);
+   let bodyScrollHeight = document.documentElement.scrollTop;
+   let footerHeight = document.querySelector('.footer').offsetHeight;
+   let headerHeight = document.querySelector('.header').offsetHeight;
+   let maxBodyScrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+
+
+   function onBodyScroll(e) {
+      if (!e.target.closest('.filter')) {
+         let delta = e.deltaY || e.detail || e.wheelDelta;
+         bodyScrollHeight += delta;
+
+         if (bodyScrollHeight > maxBodyScrollHeight) bodyScrollHeight = maxBodyScrollHeight;
+         if (bodyScrollHeight < 0) bodyScrollHeight = 0;
+
+         if (((bodyScrollHeight >= maxBodyScrollHeight - footerHeight)) && (delta > 0)) {
+            document.querySelector('.filter-container').style.height =
+               `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2 - ${footerHeight + 'px'})`;
+
+            document.documentElement.scrollTo(0, maxBodyScrollHeight);
+            bodyScrollHeight = maxBodyScrollHeight;
+         } else {
+            document.querySelector('.filter-container').style.height = `calc(100vh - ${headerHeight + 'px'} - 0.9rem * 2)`;
+
+            if (bodyScrollHeight == (maxBodyScrollHeight + delta)) {
+               document.documentElement.scrollTo(0, maxBodyScrollHeight - footerHeight);
+               bodyScrollHeight = maxBodyScrollHeight - footerHeight;
+            }
+         }
+      }
    }
 }
+
 
