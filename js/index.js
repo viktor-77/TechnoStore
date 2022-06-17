@@ -667,19 +667,16 @@ function onCheckboxClick(e) {
       e.preventDefault(); //cancels text selections in web page after mousedown
 
       function mousemoveListener(e) {
-         console.log();
 
-         // if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft)
-         //    && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth)) {
-         //    console.clear();
+         if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft + 2)  //+2
+            && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth + 2)) {   //+2
+            console.clear();
+            console.log(range.scrollWidth);
 
-         //    // console.log(rangeWrapper.clientWidth - (rangeWrapper.clientWidth - e.clientX));
-         //    // console.log(e.clientX);
-         //    // console.log(rangeWrapper.offsetLeft + range.offsetLeft);
 
-         //    console.log(-(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX));
-         //    thumb_1.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
-         // }
+            // console.log(-(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX));
+            thumb_1.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
+         }
       }
 
       addEventListener('mouseup', () => rangeWrapper.removeEventListener('mousemove', mousemoveListener));

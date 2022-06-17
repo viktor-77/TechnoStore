@@ -792,6 +792,7 @@ body {
   height: 10px;
   width: 200px;
   background-color: #444;
+  border: 1px solid grey;
 }
 
 .thumb__1,
