@@ -152,6 +152,16 @@ body {
 .header .header-menu__item {
   position: relative;
   cursor: pointer;
+  opacity: 0.91;
+}
+
+.header .header-menu__item:hover {
+  opacity: 1;
+}
+
+.header .header-menu__item:active {
+  opacity: 0.9;
+  z-index: 1;
 }
 
 .header select,
@@ -218,40 +228,16 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-.header .selected:hover {
-  opacity: 0.85;
-}
-
-.header .selected:active {
-  opacity: 0.95;
-}
-
 .header .libra {
   background: -webkit-linear-gradient(#ff3300 0%, gold 200%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.header .libra:hover {
-  opacity: 0.85;
-}
-
-.header .libra:active {
-  opacity: 0.95;
-}
-
 .header .login {
   background: -webkit-linear-gradient(#8a57f6, #6857c4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.header .login:hover {
-  opacity: 0.85;
-}
-
-.header .login:active {
-  opacity: 0.95;
 }
 
 .cart {
@@ -472,6 +458,7 @@ body {
 .cart__total:hover {
   -webkit-box-shadow: 0 0 3px #8f5db7;
           box-shadow: 0 0 3px #8f5db7;
+  border-color: #7957d5;
 }
 
 .cart__total-heading {
@@ -509,6 +496,7 @@ body {
 .cart__total-button:hover {
   -webkit-box-shadow: 2px 2px 6px #8f5db7;
           box-shadow: 2px 2px 6px #8f5db7;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5);
 }
 
 .cart__total-button:active {
@@ -516,7 +504,7 @@ body {
 }
 
 .cart .disabled {
-  background-color: #333;
+  background-color: #666;
 }
 
 .filter {
@@ -792,30 +780,30 @@ body {
   height: 10px;
   width: 200px;
   background-color: #444;
-  border: 1px solid grey;
 }
 
 .thumb__1,
 .thumb__2 {
   position: absolute;
   top: -5px;
-  height: 20px;
-  width: 20px;
+  min-height: 20px;
+  min-width: 20px;
   background-color: #7957d5;
   border-radius: 100%;
+  cursor: pointer;
 }
 
 .thumb__1:hover,
 .thumb__2:hover {
   background-color: #8a57f6;
-  padding: 0.2rem;
-  height: calc(20px + 0.2rem);
-  width: calc(20px + 0.2rem);
-  top: calc(-5px - 0.1rem);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .thumb__1:active,
 .thumb__2:active {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   background-color: purple;
 }
 
@@ -824,17 +812,9 @@ body {
   z-index: 99;
 }
 
-.thumb__1:hover {
-  left: calc(-10px - 0.1rem);
-}
-
 .thumb__2 {
   right: -10px;
   z-index: 99;
-}
-
-.thumb__2:hover {
-  right: calc(-10px - 0.1rem);
 }
 
 .product {

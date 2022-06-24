@@ -369,6 +369,12 @@ function onCheckboxClick(e) {
       document.querySelector('.filter-container').scrollTo(0,
          document.querySelector('.filter-container').scrollTop + delta);
    }
+
+   document.querySelector('.filter-container').addEventListener('mousemove', (e) => { // make cursor pointer on filter-scroll
+      if (e.clientX > (document.querySelector('.filter-container').offsetLeft + document.querySelector('.filter-container').clientWidth)) {
+         document.querySelector('.filter-container').style.cursor = 'pointer';
+      } else document.querySelector('.filter-container').style.cursor = 'auto';
+   })
 }
 
 { //search filter
@@ -664,18 +670,20 @@ function onCheckboxClick(e) {
 
    thumb_1.addEventListener('mousedown', function (e) {
       rangeWrapper.addEventListener('mousemove', mousemoveListener);
-      e.preventDefault(); //cancels text selections in web page after mousedown
+
+      let wrapperBorderWidth = (rangeWrapper.offsetWidth - rangeWrapper.clientWidth) / 2;
+      let delay = e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft + thumb_1.offsetLeft);
+      console.log(delay);
+
 
       function mousemoveListener(e) {
-
-         if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft + 2)  //+2
-            && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth + 2)) {   //+2
+         if ((e.clientX >= (range.offsetLeft + rangeWrapper.offsetLeft + wrapperBorderWidth - 10)) && (e.clientX <= (range.offsetLeft + rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetWidth + 10))) {
             console.clear();
-            console.log(range.scrollWidth);
+            console.log(e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft));
 
 
-            // console.log(-(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX));
-            thumb_1.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
+            thumb_1.style.left = e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft) - delay + 'px';
+
          }
       }
 
@@ -683,22 +691,30 @@ function onCheckboxClick(e) {
    })
 
 
-   thumb_2.addEventListener('mousedown', function (e) {
-      rangeWrapper.addEventListener('mousemove', mousemoveListener);
-      e.preventDefault();
+   // thumb_2.addEventListener('mousedown', function (e) {
+   //    rangeWrapper.addEventListener('mousemove', mousemoveListener);
+   //    e.preventDefault();
 
-      function mousemoveListener(e) {
-         if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft)
-            && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth)) {
+   //    function mousemoveListener(e) {
+   //       if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft)
+   //          && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth)) {
 
-            thumb_2.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
-         }
-      }
-      addEventListener('mouseup', () => rangeWrapper.removeEventListener('mousemove', mousemoveListener));
-   })
-
-
+   //          thumb_2.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
+   //       }
+   //    }
+   //    addEventListener('mouseup', () => rangeWrapper.removeEventListener('mousemove', mousemoveListener));
+   // })
 }
 
 
 
+document.querySelector('body').addEventListener('mousedown', function (e) { //   remove text selecting after mousedown
+   e.preventDefault();
+})
+
+document.documentElement.onmousemove = (e) => { // make cursor pointer on page-scroll hover
+   if (e.clientX > (e.currentTarget.offsetWidth)) {
+      e.currentTarget.style.cursor = 'pointer';
+   }
+   else e.currentTarget.style.cursor = 'auto';
+}
