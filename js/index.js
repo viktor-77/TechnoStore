@@ -1,5 +1,6 @@
 import productList from "./productlist.js";
 
+
 let FilterOptionsList = {};
 productList.categories.forEach((i) => (FilterOptionsList[i] = [])); // form filterList
 let SelectedProducts = productList.phones;
@@ -662,54 +663,15 @@ function onCheckboxClick(e) {
 
 
 { //range-slider
-   let rangeWrapper = document.querySelector('.range-wrapper');
-   let range = document.querySelector('.range');
-   let thumb_1 = document.querySelector('.thumb__1');
-   let thumb_2 = document.querySelector('.thumb__2');
 
-
-   thumb_1.addEventListener('mousedown', function (e) {
-      rangeWrapper.addEventListener('mousemove', mousemoveListener);
-
-      let wrapperBorderWidth = (rangeWrapper.offsetWidth - rangeWrapper.clientWidth) / 2;
-      let delay = e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft + thumb_1.offsetLeft);
-      console.log(delay);
-
-
-      function mousemoveListener(e) {
-         if ((e.clientX >= (range.offsetLeft + rangeWrapper.offsetLeft + wrapperBorderWidth - 10)) && (e.clientX <= (range.offsetLeft + rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetWidth + 10))) {
-            console.clear();
-            console.log(e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft));
-
-
-            thumb_1.style.left = e.clientX - (rangeWrapper.offsetLeft + wrapperBorderWidth + range.offsetLeft) - delay + 'px';
-
-         }
-      }
-
-      addEventListener('mouseup', () => rangeWrapper.removeEventListener('mousemove', mousemoveListener));
-   })
-
-
-   // thumb_2.addEventListener('mousedown', function (e) {
-   //    rangeWrapper.addEventListener('mousemove', mousemoveListener);
-   //    e.preventDefault();
-
-   //    function mousemoveListener(e) {
-   //       if ((e.clientX >= rangeWrapper.offsetLeft + range.offsetLeft)
-   //          && (e.clientX <= rangeWrapper.offsetLeft + range.offsetLeft + range.clientWidth)) {
-
-   //          thumb_2.style.left = -(rangeWrapper.offsetLeft + range.offsetLeft - e.clientX) + 'px';
-   //       }
-   //    }
-   //    addEventListener('mouseup', () => rangeWrapper.removeEventListener('mousemove', mousemoveListener));
-   // })
 }
 
 
 
 document.querySelector('body').addEventListener('mousedown', function (e) { //   remove text selecting after mousedown
-   e.preventDefault();
+   if (e.target.type != 'range') {
+      e.preventDefault();
+   }
 })
 
 document.documentElement.onmousemove = (e) => { // make cursor pointer on page-scroll hover

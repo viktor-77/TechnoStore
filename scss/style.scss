@@ -2,6 +2,8 @@
 
 @import url("../css/nullStyle.css");
 
+@import url("../css/multirange.css");
+
 @import url(../fontawesome-free-6.1.1-web/css/all.css);
 
 * {
@@ -682,41 +684,66 @@ body {
 }
 
 .range {
-   position: relative;
-   height: 10px;
-   width: 200px;
-   background-color: #444;
-}
-
-.thumb__1,
-.thumb__2 {
    position: absolute;
-   top: -5px;
-   min-height: 20px;
-   min-width: 20px;
+   top: 0;
+   bottom: 0;
+   margin: auto;
+   width: 100%;
+   pointer-events: none;
+   appearance: none;
+   outline: none;
+   background-color: transparent;
+   height: 20px;
+}
+.range::-ms-track {
+   appearance: none;
+}
+.range::-webkit-slider-thumb {
+   appearance: none;
+   width: 20px;
+   height: 20px;
    background-color: $color_1;
    border-radius: 100%;
    cursor: pointer;
-
-   &:hover {
-      background-color: #8a57f6;
-      transform: scale(1.1);
-   }
-   &:active {
-      transform: scale(1.1);
-      background-color: purple;
-   }
+   pointer-events: auto;
+}
+.slider-track {
+   width: 100%;
+   height: 5px;
+   background-color: #7c3780;
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   margin: auto;
 }
 
-.thumb__1 {
-   left: -10px;
-   z-index: 99;
-}
+// .range-active {
+//    position: absolute;
+//    height: 8px;
+//    width: 100px;
+//    border-radius: 100px;
+//    background-color: #7c3780;
+// }
 
-.thumb__2 {
-   right: -10px;
-   z-index: 99;
-}
+// .thumb__1,
+// .thumb__2 {
+//    position: absolute;
+//    top: -6px;
+//    min-height: 20px;
+//    min-width: 20px;
+//    background-color: $color_1;
+//    border-radius: 100%;
+//    cursor: pointer;
+
+//    &:hover {
+//       background-color: #8a57f6;
+//       transform: scale(1.1);
+//    }
+//    &:active {
+//       transform: scale(1.1);
+//       background-color: purple;
+//    }
+// }
 
 ///
 
